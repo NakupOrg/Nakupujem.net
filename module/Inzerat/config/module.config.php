@@ -7,7 +7,7 @@
       ),
       'router' => array(
             'routes' => array(
-                'album' => array(
+                'product' => array(
                     'type' => 'segment',
                     'options' => array(
                         'route' => '/product[/][:action][/][:id]',
