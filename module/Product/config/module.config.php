@@ -25,11 +25,6 @@
       ),                 
       
       'view_manager' => array(
-          'template_path_stack' => array(
-              'Product' => __DIR__ . '/../view',
-          ),
-      ),
-      'view_manager' => array(
         'display_not_found_reason' => true,
         'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
@@ -42,7 +37,7 @@
             'error/index'             => __DIR__ . '/../view/error/index.phtml',
         ),
         'template_path_stack' => array(
-            __DIR__ . '/../view',
+              'product' => __DIR__ . '/../view',
         ),
     ),
   );
