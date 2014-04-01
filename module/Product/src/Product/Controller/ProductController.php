@@ -7,25 +7,26 @@
 *
 *
 */
+namespace Product\Controller;
 
-public function indexAction()
-{
-	/*Zavola index*/
-}
+ use Zend\Mvc\Controller\AbstractActionController;
+ use Zend\View\Model\ViewModel;
+class ProductController extends AbstractActionController
+ {
+     public function indexAction()
+     {
+     }
 
-public function addAction()
-{
-	/*Zavola funkciu na pridanie productu*/
-}
+     public function addAction()
+     {
+     }
 
-public function editAction()
-{
-	/*Zavola funkciu na editovanie productu*/
-}
+     public function editAction()
+     {
+     }
 
-public function deleteAction()
-{
-	/*Zavola funkciu na mazanie productu*/
-}
-
+     public function deleteAction()
+     {
+     }
+ }
 ?>

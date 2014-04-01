@@ -26,7 +26,7 @@
       
       'view_manager' => array(
           'template_path_stack' => array(
-              'product' => __DIR__ . '/../view',
+              'Product' => __DIR__ . '/../view',
           ),
       ),
   );
