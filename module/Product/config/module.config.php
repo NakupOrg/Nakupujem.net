@@ -2,7 +2,7 @@
   return array(
       'controllers' => array(
           'invokables' => array(
-              'Inzerat\Controller\Product' => 'Inzerat\Controller\ProductController',
+              'Product\Controller\Product' => 'Product\Controller\ProductController',
            ),
       ),
       'router' => array(
@@ -16,7 +16,7 @@
                             'id' => '[0-9]+'
                         ),
                         'defaults' => array(
-                            'controller' => 'Inzerat\Controller\Product',
+                            'controller' => 'Product\Controller\Product',
                             'action'     => 'index',
                         ),
                     ),
