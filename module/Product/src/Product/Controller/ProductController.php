@@ -13,8 +13,19 @@ namespace Product\Controller;
  use Zend\View\Model\ViewModel;
 
 
+
 class ProductController extends AbstractActionController
  {
+
+    public function getProductTable()
+     {
+         if (!$this->productTable) {
+             $sm = $this->getServiceLocator();
+             $this->productTable = $sm->get('Product\Model\ProductTable');
+         }
+         return $this->productTable;
+     }
+
      public function indexAction()
      {
           return new ViewModel(array(
@@ -34,13 +45,6 @@ class ProductController extends AbstractActionController
      {
      }
 
-     public function getProductTable()
-     {
-         if (!$this->productTable) {
-             $sm = $this->getServiceLocator();
-             $this->productTable = $sm->get('Product\Model\ProductTable');
-         }
-         return $this->productTable;
-     }
+     
  }
 ?>
