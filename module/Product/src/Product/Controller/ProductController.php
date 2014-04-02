@@ -1,6 +1,6 @@
 <?php 
 /* **Product Controller** 
-* module/Inzerat/src/Inzerat/Controller/ProductController.php
+* module/Product/src/Product/Controller/ProductController.php
 *
 * 
 *
@@ -11,11 +11,15 @@ namespace Product\Controller;
 
  use Zend\Mvc\Controller\AbstractActionController;
  use Zend\View\Model\ViewModel;
+
+
 class ProductController extends AbstractActionController
  {
      public function indexAction()
      {
-         return new ViewModel(); 
+          return new ViewModel(array(
+             'products' => $this->getAlbumTable()->fetchAll(),
+             )); 
      }
 
      public function addAction()
@@ -28,6 +32,15 @@ class ProductController extends AbstractActionController
 
      public function deleteAction()
      {
+     }
+
+     public function getProductTable()
+     {
+         if (!$this->productTable) {
+             $sm = $this->getServiceLocator();
+             $this->productTable = $sm->get('Product\Model\ProductTable');
+         }
+         return $this->productTable;
      }
  }
 ?>
