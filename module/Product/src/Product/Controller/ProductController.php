@@ -16,14 +16,15 @@ namespace Product\Controller;
 
 class ProductController extends AbstractActionController
  {
+    protected $productTable;
 
     public function getProductTable()
      {
-         if (!$this->productTable) {
+        if (!$this->productTable) {
              $sm = $this->getServiceLocator();
              $this->productTable = $sm->get('Product\Model\ProductTable');
          }
-         return $this->productTable;
+         return $this->productTable; 
      }
 
      public function indexAction()

@@ -11,7 +11,7 @@
  * file.
  */
 
-return array(
+ return array(
      'db' => array(
          'driver'         => 'Pdo',
          'dsn'            => 'mysql:dbname=nakupujem;host=localhost',
