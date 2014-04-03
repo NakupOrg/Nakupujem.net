@@ -39,7 +39,7 @@ div.container a.brand {
 form label, form label span {
 display: block;
 }
-a:hover{
+.thumbnail:hover{
 text-decoration: none;
 box-shadow: 10px 10px 5px #888888;
 }
