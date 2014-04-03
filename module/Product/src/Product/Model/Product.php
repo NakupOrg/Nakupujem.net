@@ -4,7 +4,12 @@
 
 namespace Product\Model;
 
-class Product 
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
+
+class Product implements InputFilterAwareInterface
 {
 	public $id;
 	public $title;
@@ -17,6 +22,8 @@ class Product
 	public $price;
 	public $date;
 	public $view_counter;
+
+	protected $inputFilter;
 
 
 	public function exchangeArray($data) {
@@ -32,6 +39,162 @@ class Product
 		$this->price       	= (!empty($data['price'])) 		  ? $data['price'] 		  : null;
 		//$this->date 	   	= (!empty($data['date'])) 		  ? $date['date'] 		  : null;
 		$this->view_counter = (!empty($data['view_counter'])) ? $data['view_counter'] : null;
+	}
+
+	public function setInputFilter(InputFilterInterface $inputFilter) {
+		throw new Exception("Nepoužité");
+		
+	}
+
+	public function getInputFilter() {
+		if(!$this->inputFilter) {
+			$inputFilter = new InputFilter();
+
+			$inputFilter->add(array(
+				'name' => 'id',
+				'required' => true,
+				'filters' => array(
+					array('name' => 'Int'),
+				),
+			));
+
+			$inputFilter->add(array(
+                 'name'     => 'title',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'description',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'phone',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'email',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'price',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'location',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'shipping',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$this->inputFilter = $inputFilter;
+		}
+
+		return $this->inputFilter;
 	}
 }
 

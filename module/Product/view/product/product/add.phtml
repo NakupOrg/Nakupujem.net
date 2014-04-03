@@ -1,1 +1,14 @@
-add.phtml
+<?php
+ // module/Album/view/album/album/add.phtml:
+
+ $title = 'Pridať inzerát';
+ $this->headTitle($title);
+ ?>
+ <h1><?php echo $this->escapeHtml($title); ?></h1>
+ <?php
+ $form->setAttribute('action', $this->url('product', array('action' => 'add')));
+ $form->prepare();
+
+ echo $this->form()->openTag($form);
+ echo $this->formCollection($form);
+ echo $this->form()->closeTag();

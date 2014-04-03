@@ -11,6 +11,8 @@ namespace Product\Controller;
 
  use Zend\Mvc\Controller\AbstractActionController;
  use Zend\View\Model\ViewModel;
+ use Product\Model\Product;
+ use Product\Form\ProductForm;
 
 
 
@@ -36,6 +38,24 @@ class ProductController extends AbstractActionController
 
      public function addAction()
      {
+        $form = new ProductForm();
+         $form->get('submit')->setValue('Add');
+
+         $request = $this->getRequest();
+         if ($request->isPost()) {
+             $product = new Product();
+             $form->setInputFilter($product->getInputFilter());
+             $form->setData($request->getPost());
+
+             if ($form->isValid()) {
+                 $product->exchangeArray($form->getData());
+                 $this->getProductTable()->saveProduct($product);
+
+                 // Redirect to list of albums
+                 return $this->redirect()->toRoute('product');
+             }
+         }
+         return array('form' => $form);
      }
 
      public function editAction()
