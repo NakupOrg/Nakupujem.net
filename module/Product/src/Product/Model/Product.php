@@ -19,7 +19,7 @@ class Product
 	public $view_counter;
 
 
-	public function exchangeArrays($data) {
+	public function exchangeArray($data) {
 		/*Exchange data from database to class variables */
 		$this->id 	 	   	= (!empty($data['id'])) 		  ? $data['id'] 		  : null;
 		$this->title 	   	= (!empty($data['title'])) 		  ? $data['title'] 		  : null;
