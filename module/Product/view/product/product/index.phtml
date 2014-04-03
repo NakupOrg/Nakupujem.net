@@ -1,0 +1,30 @@
+<?php
+
+$title = 'Nakupujem.net';
+$this->headTitle($title);
+?>
+<h1><?php echo $this->escapeHtml($title); ?></h1>
+<p>
+    <a href="<?php echo $this->url('product', array('action'=>'add')); ?>">Pridať nový inzerát</a>
+</p>    
+
+<table class="table">
+    <tr>
+        <th>Názov inzerátu</th>
+        <th>Popis inzerátu</th>
+        <th>Tel. číslo</th>
+        <th>Email</th>
+        <th>Cena</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach($products as $product) : ?>
+    <tr>
+        <td><?php echo $this->escapeHtml($product->title); ?></td>
+        <td><?php echo $this->escapeHtml($product->description); ?></td>
+        <td><?php echo $this->escapeHtml($product->phone); ?></td>
+        <td><?php echo $this->escapeHtml($product->email); ?></td>
+        <td><?php echo $this->escapeHtml($product->price); ?></td>
+        <td>
+    </tr>
+    <?php endforeach; ?>
+</table>    
