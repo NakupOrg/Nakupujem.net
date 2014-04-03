@@ -57,7 +57,7 @@ class ProductController extends AbstractActionController
 
 
        return new ViewModel(array(
-             'products' => $product,
+             'product' => $product,
              ));  
        var_dump($product);
      }

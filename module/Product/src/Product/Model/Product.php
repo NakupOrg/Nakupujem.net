@@ -41,6 +41,7 @@ class Product implements InputFilterAwareInterface
 		//$this->date 	   	= (!empty($data['date'])) 		  ? $date['date'] 		  : null;
 		$this->view_counter = (!empty($data['view_counter'])) ? $data['view_counter'] : null;
         $this->top          = (!empty($data['top']))          ? $data['top']          : null;
+        $this->category     = (!empty($data['category']))     ? $data['category']     : null;
 	}
 
 	public function setInputFilter(InputFilterInterface $inputFilter) {
@@ -197,6 +198,9 @@ class Product implements InputFilterAwareInterface
                 'name' => 'top',
                 'required' => true,
             ));
+
+
+
 
 			$this->inputFilter = $inputFilter;
 		}

@@ -1,6 +1,6 @@
 <?php
 
-$title = $products->title;
+$title = $product->title;
 $this->headTitle($title);
 ?>
 <p>
@@ -8,23 +8,23 @@ $this->headTitle($title);
 </p>	
 
 	<div class="col-md-6 col-lg-6">
-		<h2><?php echo $this->escapeHtml($products->title); ?></h2> 
-		<?php if($products->top == 'ano') { echo '<span class="label label-warning pull-right">TOP</span>'; } ?>
+		<h2><?php echo $this->escapeHtml($product->title); ?></h2> 
+		<?php if($product->top == 'ano') { echo '<span class="label label-warning pull-right">TOP</span>'; } ?>
 		
 
-			<h5><?php echo $this->escapeHtml($products->description); ?></h5>
+			<h5><?php echo $this->escapeHtml($product->description); ?></h5>
 			<p>
 			
 				<p>
-			<div class="well">Telefónne číslo: <?php echo $this->escapeHtml($products->phone); ?>
+			<div class="well">Telefónne číslo: <?php echo $this->escapeHtml($product->phone); ?>
 			<p>
-			Email: <?php echo $this->escapeHtml($products->email); ?>
+			Email: <?php echo $this->escapeHtml($product->email); ?>
 			<p>
-			Cena: <span class="label label-success"><?php echo $this->escapeHtml($products->price); ?></span>
+			Cena: <span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span>
 			<p>
-			Odosiela do:<?php echo $this->escapeHtml($products->shipping); ?>
+			Odosiela do:<?php echo $this->escapeHtml($product->shipping); ?>
 			<p>
-			Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($products->location); ?></span>
+			Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span>
 			</div></div>
 		
 		
