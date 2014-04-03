@@ -39,3 +39,6 @@ div.container a.brand {
 form label, form label span {
 display: block;
 }
+a:hover{
+text-decoration: none;
+}
