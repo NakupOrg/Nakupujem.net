@@ -1,0 +1,35 @@
+<?php
+
+$title = $products->title;
+$this->headTitle($title);
+?>
+<p>
+
+</p>	
+
+	<div class="col-md-6 col-lg-6">
+		<h2><?php echo $this->escapeHtml($products->title); ?></h2>
+		
+
+			<h5><?php echo $this->escapeHtml($products->description); ?></h5>
+			<p>
+			
+				<p>
+			<div class="well">Telefónne číslo: <?php echo $this->escapeHtml($products->phone); ?>
+			<p>
+			Email: <?php echo $this->escapeHtml($products->email); ?>
+			<p>
+			Cena: <span class="label label-success"><?php echo $this->escapeHtml($products->price); ?></span>
+			<p>
+			Odosiela do:<?php echo $this->escapeHtml($products->shipping); ?>
+			<p>
+			Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($products->location); ?></span>
+			</div></div>
+		
+		
+	
+</div>
+
+	<div class="col-md-6 col-lg-6">
+
+	</div>
