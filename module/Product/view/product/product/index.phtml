@@ -5,60 +5,36 @@ $this->headTitle($title);
 ?>
 <p>
     <a href="<?php echo $this->url('product', array('action'=>'add')); ?>">Pridať nový inzerát</a>
-<<<<<<< HEAD
-</p> 
-=======
-</p>    
+</p>
 
 <?php foreach($products as $product) : ?>
 <div class="row">
   <div class="col-sm-6 col-md-4">
     <a href="<?php echo $this->url('product',array(
-                'action' => 'show',  'id' => $product->id)); ?>"  class="thumbnail">
+                'action' => 'show', 'id' => $product->id)); ?>" class="thumbnail">
+      <span class="label label-warning pull-right">TOP</span>
       <img src="<?php echo $this->basePath('img/placeholder.gif') ?>" alt="...">
       <div class="caption">
         <h3><?php echo $this->escapeHtml($product->title); ?></h3>
         <p>
             <?php echo $this->escapeHtml($product->description); ?>
             <br>
-            <b>Price: </b> <?php echo $this->escapeHtml($product->price); ?>
+            Price:  <span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span>
         </p>
         <p>
-            <b>Lokalita: </b><?php echo $this->escapeHtml($product->location); ?>
+            Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span>
         </p>
       </div>
   </a>
   </div>
 </div>
->>>>>>> 1c4b3369b5e06ee21758577c633019d7e64bfb6e
-
-
-
-    
-<div class="row">
-        <div class="col-md-3 col-lg-3">
-            <?php foreach($products as $product) : ?>
-            <a href="#" class="thumbnail">
-                <span class="label label-warning pull-right">TOP</span>
-                <img src="<?php echo $this->basePath('img/placeholder.gif') ?>" alt="..."></img>
-                    <div class="caption">
-                        <h3><?php echo $this->escapeHtml($product->title); ?></h3>
-                        <p>
-                        <?php echo $this->escapeHtml($product->description); ?>
-                        <br>
-                        Cena: <span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span>  
-                        </p>
-                        <p>
-                        Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span>
-                        </p>
-                    </div>
-            </a>
-        
-        <?php endforeach; ?>
-    </div>
-</div>
 
 
 
 
+
+
+<?php //echo $this->escapeHtml($product->email); ?>
+
+<?php endforeach; ?>
    
