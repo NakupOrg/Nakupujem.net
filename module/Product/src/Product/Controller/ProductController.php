@@ -36,10 +36,36 @@ class ProductController extends AbstractActionController
              )); 
      }
 
+     public function showAction()
+     {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+             return $this->redirect()->toRoute('product', array(
+                 'action' => 'add'
+             ));
+        }
+
+        try {
+             $product = $this->getProductTable()->getProduct($id);
+         }
+         catch (\Exception $ex) {
+             
+             return $this->redirect()->toRoute('product', array(
+                 'action' => 'index'
+             ));
+         }
+
+
+       return new ViewModel(array(
+             'products' => $product,
+             ));  
+       var_dump($product);
+     }
+
      public function addAction()
      {
         $form = new ProductForm();
-         $form->get('submit')->setValue('Add');
+         $form->get('submit')->setValue('Pridať inzerát');
 
          $request = $this->getRequest();
          if ($request->isPost()) {
