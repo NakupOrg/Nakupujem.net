@@ -8,23 +8,32 @@ $this->headTitle($title);
     <a href="<?php echo $this->url('product', array('action'=>'add')); ?>">Pridať nový inzerát</a>
 </p>    
 
-<table class="table">
-    <tr>
-        <th>Názov inzerátu</th>
-        <th>Popis inzerátu</th>
-        <th>Tel. číslo</th>
-        <th>Email</th>
-        <th>Cena</th>
-        <th>&nbsp;</th>
-    </tr>
-    <?php foreach($products as $product) : ?>
-    <tr>
-        <td><?php echo $this->escapeHtml($product->title); ?></td>
-        <td><?php echo $this->escapeHtml($product->description); ?></td>
-        <td><?php echo $this->escapeHtml($product->phone); ?></td>
-        <td><?php echo $this->escapeHtml($product->email); ?></td>
-        <td><?php echo $this->escapeHtml($product->price); ?></td>
-        <td>
-    </tr>
-    <?php endforeach; ?>
-</table>    
+<?php foreach($products as $product) : ?>
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <a href="#" class="thumbnail">
+      <img src="<?php echo $this->basePath('img/placeholder.gif') ?>" alt="...">
+      <div class="caption">
+        <h3><?php echo $this->escapeHtml($product->title); ?></h3>
+        <p>
+            <?php echo $this->escapeHtml($product->description); ?>
+            <br>
+            <b>Price: </b> <?php echo $this->escapeHtml($product->price); ?>
+        </p>
+        <p>
+            <b>Lokalita: </b><?php echo $this->escapeHtml($product->location); ?>
+        </p>
+      </div>
+  </a>
+  </div>
+</div>
+
+
+
+
+
+
+<?php //echo $this->escapeHtml($product->email); ?>
+
+<?php endforeach; ?>
+   
