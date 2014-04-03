@@ -3,13 +3,14 @@
 $title = 'Nakupujem.net';
 $this->headTitle($title);
 ?>
-<p>
-    <a href="<?php echo $this->url('product', array('action'=>'add')); ?>">Pridať nový inzerát</a>
-</p>
 
-<?php foreach($products as $product) : ?>
-<div class="row">
-  <div class="col-sm-6 col-md-4">
+<?php 
+$count = 0;
+foreach($products as $product) :
+if (!$count%4)
+       { echo '<div class="row">';}
+?>
+<div class="col-md-3 col-lg-3">
     <a href="<?php echo $this->url('product',array(
                 'action' => 'show', 'id' => $product->id)); ?>" class="thumbnail">
       <span class="label label-warning pull-right">TOP</span>
@@ -27,14 +28,19 @@ $this->headTitle($title);
       </div>
   </a>
   </div>
-</div>
 
+<?php
+    // close row if there is 4 thumbnails in it
+    if ($count%4 == 3)
+        {echo '</div><div class="row">';}
 
+    $count++;
 
+endforeach; 
 
-
-
-<?php //echo $this->escapeHtml($product->email); ?>
-
-<?php endforeach; ?>
+// close the row at the end if the last one wasn't full
+    if ($count%4>0){
+    echo '</div>';
+  }
+?>
    
