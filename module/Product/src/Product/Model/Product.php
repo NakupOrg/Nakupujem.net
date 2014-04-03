@@ -30,7 +30,7 @@ class Product
 		$this->shipping    	= (!empty($data['shipping'])) 	  ? $data['shipping'] 	  : null;
 		$this->user_id     	= (!empty($data['user_id'])) 	  ? $data['user_id'] 	  : null;
 		$this->price       	= (!empty($data['price'])) 		  ? $data['price'] 		  : null;
-		$this->date 	   	= (!empty($data['date'])) 		  ? $date['date'] 		  : null;
+		//$this->date 	   	= (!empty($data['date'])) 		  ? $date['date'] 		  : null;
 		$this->view_counter = (!empty($data['view_counter'])) ? $data['view_counter'] : null;
 	}
 }
