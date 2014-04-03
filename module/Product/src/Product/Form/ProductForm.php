@@ -3,6 +3,7 @@
 namespace Product\Form;
 
 use Zend\Form\Form;
+use Zend\Form\Element;
 
 class ProductForm extends Form
 {
@@ -71,6 +72,18 @@ class ProductForm extends Form
 				'label' => 'Odosiela do:',
 			),
 		));
+
+		$this->add(array(
+			'name' => 'top',
+			'type' => 'Zend\Form\Element\Select',
+			'options' => array(
+				'label' =>'Topovať inzerát?',
+				'value_options' => array(
+					'nie' => 'Nie',
+					'ano' => 'Áno'
+					),
+				),
+			));
 
 		$this->add(array(
              'name' => 'submit',

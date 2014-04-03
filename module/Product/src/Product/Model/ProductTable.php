@@ -39,6 +39,7 @@ namespace Product\Model;
              'location'     => $product->location,
              'shipping'     => $product->shipping,
              'price'        => $product->price,
+             'top'          => $product->top,
             );
 
         $id = (int) $product->id;

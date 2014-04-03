@@ -8,7 +8,8 @@ $this->headTitle($title);
 </p>	
 
 	<div class="col-md-6 col-lg-6">
-		<h2><?php echo $this->escapeHtml($products->title); ?></h2>
+		<h2><?php echo $this->escapeHtml($products->title); ?></h2> 
+		<?php if($products->top == 'ano') { echo '<span class="label label-warning pull-right">TOP</span>'; } ?>
 		
 
 			<h5><?php echo $this->escapeHtml($products->description); ?></h5>
