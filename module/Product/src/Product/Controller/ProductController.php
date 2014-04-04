@@ -132,7 +132,7 @@ class ProductController extends AbstractActionController
 
         $form = new ProductForm($category_options);
         $form->bind($product);
-        $form->get('submit')->setAttribute('value', 'Edit')->setAttribute('class', 'btn btn-primary');
+        $form->get('submit')->setAttribute('value', 'Edituj')->setAttribute('class', 'btn btn-primary');
 
         $request = $this->getRequest();
         if($request->isPost())
@@ -157,8 +157,27 @@ class ProductController extends AbstractActionController
 
      public function deleteAction()
      {
-     }
+        $id = (int) $this->params()->fromRoute('id', 0);
+         if (!$id) 
+        {
+            return $this->redirect()->toRoute('product');
+        }
+        $request = $this->getRequest();
+        if ($request->isPost()) 
+        {
+            $del = $request->getPost('del', 'No');
+        }
+        if ($del == 'Yes') 
+        {
+            $id = (int) $request->getPost('id');
+            $this->getProductTable()->deleteProduct($id);
+        }
 
-     
+        return $this->redirect()->toRoute('product');
+        return array(
+             'id'    => $id,
+             'product' => $this->getProductTable()->getProduct($id)
+         );
  }
+}
 ?>

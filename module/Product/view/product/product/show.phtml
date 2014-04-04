@@ -10,24 +10,21 @@ $this->headTitle($title);
 	<div class="col-md-6 col-lg-6">
 		<h2><?php echo $this->escapeHtml($product->title); ?></h2> 
 		<?php if($product->top == 'ano') { echo '<span class="label label-warning pull-right">TOP</span>'; } ?>
-		
-
 			<h5><?php echo $this->escapeHtml($product->description); ?></h5>
-			<h5>Kategória: <?php echo $this->escapeHtml($category->name); ?> </h5>
+			<div class="well">
 			<p>
-			
-				<p>
-			<div class="well">Telefónne číslo: <?php echo $this->escapeHtml($product->phone); ?>
-			<p>
+			Telefónne číslo: <?php echo $this->escapeHtml($product->phone); ?><br />
 			Email: <?php echo $this->escapeHtml($product->email); ?>
+			</p>
 			<p>
-			Cena: <span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span>
-			<p>
-			Odosiela do:<?php echo $this->escapeHtml($product->shipping); ?>
-			<p>
-			Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span>
+			Kategória: <span class="label label-warning"><?php echo $this->escapeHtml($category->name); ?></span><br />
+			Odosiela do:<?php echo $this->escapeHtml($product->shipping); ?><br />
+			Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span><br />
+			<h5><b>Cena: <span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span></b></h5>
+			</p>
 			</div>
-			<a class="btn btn-primary" href="<?php echo $this->url('product', array('action'=>'edit', 'id'=>$product->id)); ?>">Edituj</a>
+			<a class="btn btn-primary" href="<?php echo $this->url('product', array('action'=>'edit', 'id'=>$product->id)); ?>"><b class="glyphicon glyphicon-edit"></b>&nbsp;Edituj</a>
+			<a class="btn btn-danger" href="<?php echo $this->url('product', array('action'=>'delete', 'id'=>$product->id)); ?>"><b class="glyphicon glyphicon-remove"></b>&nbsp;Zmaž</a>
 		</div>
 
 

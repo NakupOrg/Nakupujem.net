@@ -1,6 +1,6 @@
 body {
     padding-top: 60px;
-    padding-bottom: 40px;
+    padding-bottom: 0px;
 }
 
 .zf-green {
@@ -34,6 +34,7 @@ div.container a.brand {
     background: url("../img/zf2-logo.png") no-repeat scroll 0 10px transparent;
     margin-left: 0;
     padding: 8px 20px 12px 40px;
+    
 }
 
 form label, form label span {
@@ -43,3 +44,21 @@ display: block;
 text-decoration: none;
 box-shadow: 10px 10px 5px #888888;
 }
+input {
+  -webkit-transition: all 0.30s ease-in-out;
+  -moz-transition: all 0.30s ease-in-out;
+  -ms-transition: all 0.30s ease-in-out;
+  -o-transition: all 0.30s ease-in-out;
+  outline: none;
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid #DDDDDD;
+  }
+input:focus {  
+  box-shadow: 0 0 4px rgba(81, 203, 238, 1);
+  padding: 3px 0px 3px 3px;
+  margin: 5px 1px 3px 0px;
+  border: 1px solid rgba(81, 203, 238, 1);
+  border-radius:25px;
+}
+
