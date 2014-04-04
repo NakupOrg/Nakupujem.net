@@ -20,6 +20,7 @@ class ProductController extends AbstractActionController
  {
     protected $productTable;
     protected $categoryTable;
+    public $category;
 
     public function getProductTable()
      {

@@ -2,6 +2,7 @@
 
 $title = 'Nakupujem.net';
 $this->headTitle($title);
+
 ?>
 
 <?php 
@@ -20,6 +21,7 @@ if (!$count%4)
         <p>
             <?php echo $this->escapeHtml($product->description); ?>
             <br>
+            Kategória: <?php // echo $this->esca($category->name); ?><br>
             Price:  <span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span>
         </p>
         <p>
