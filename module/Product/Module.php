@@ -3,6 +3,8 @@ namespace Product;
 
  use Product\Model\Product;
  use Product\Model\ProductTable;
+ use Product\Model\Category;
+ use Product\Model\CategoryTable;
  use Zend\Db\ResultSet\ResultSet;
  use Zend\Db\TableGateway\TableGateway;
 
@@ -41,6 +43,28 @@ class Module
                      $resultSetPrototype->setArrayObjectPrototype(new Product());
                      return new TableGateway('product', $dbAdapter, null, $resultSetPrototype);
                  },
+                   'Product\Model\CategoryTable' =>  function($sm)
+                {
+                    //get the tableGateway just below in his own factory
+                    $tableGateway = $sm->get('CategoryTableGateway');
+                    //inject the tableGateway in the Table
+                    $table = new CategoryTable($tableGateway);
+                    return $table;
+                },
+                //here is the tableGateway Factory for the category
+                'CategoryTableGateway' => function($sm)
+                {
+                    //get adapter to donnect dataBase
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    // create a resultSet
+                    $resultSetPrototype = new ResultSet();
+                    //define the prototype of the resultSet 
+                    // => what object will be cloned to get the results
+                    $resultSetPrototype->setArrayObjectPrototype(new Category());
+                    //here you define your database table (category) 
+                    //when you return the tableGateway to the CategoryTable factory
+                    return new TableGateway('category', $dbAdapter, null, $resultSetPrototype);
+                },
              ),
          );
      }

@@ -19,6 +19,7 @@ namespace Product\Controller;
 class ProductController extends AbstractActionController
  {
     protected $productTable;
+    protected $categoryTable;
 
     public function getProductTable()
      {
@@ -28,6 +29,15 @@ class ProductController extends AbstractActionController
          }
          return $this->productTable; 
      }
+
+    public function getCategoryTable() {
+        if(!$this->categoryTable){
+            $this->categoryTable = $this->getServiceLocator()
+                ->get('Product\Model\CategoryTable');
+        }
+        return $this->categoryTable;
+    }
+
 
      public function indexAction()
      {
@@ -46,7 +56,8 @@ class ProductController extends AbstractActionController
         }
 
         try {
-             $product = $this->getProductTable()->getProduct($id);
+             $product  = $this->getProductTable()->getProduct($id);
+             $category = $this->getCategoryTable()->getCategory($product->category_id);
          }
          catch (\Exception $ex) {
              
@@ -58,13 +69,19 @@ class ProductController extends AbstractActionController
 
        return new ViewModel(array(
              'product' => $product,
+             'category' => $category,
              ));  
-       var_dump($product);
      }
 
      public function addAction()
      {
-        $form = new ProductForm();
+        
+        $categories = $this->getCategoryTable()->fetchAll();
+        $category_options = array();
+           foreach ($categories as $category) {
+                $category_options[$category->id] = $category->name;
+            }
+         $form = new ProductForm($category_options);
          $form->get('submit')->setValue('Pridať inzerát');
 
          $request = $this->getRequest();

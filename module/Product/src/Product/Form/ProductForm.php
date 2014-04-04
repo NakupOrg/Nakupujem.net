@@ -7,7 +7,7 @@ use Zend\Form\Element;
 
 class ProductForm extends Form
 {
-	public function __construct($name=null)
+	public function __construct($category_options)
 	{
 
 		parent::__construct('product');
@@ -32,6 +32,15 @@ class ProductForm extends Form
 				'label' => 'Popis inzererátu:',
 			),
 		));
+
+		$this->add(array(
+			'name' => 'category_id',
+			'type' => 'Zend\Form\Element\Select',
+			'options' => array(
+				'label' => 'Kategória inzerátu:',
+				'value_options' => $category_options
+				),
+			));
 
 		$this->add(array(
 			'name' => 'phone',
