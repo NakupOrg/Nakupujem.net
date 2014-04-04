@@ -26,7 +26,11 @@ $this->headTitle($title);
 			Odosiela do:<?php echo $this->escapeHtml($product->shipping); ?>
 			<p>
 			Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span>
-			</div></div>
+			</div>
+			<a class="btn btn-primary" href="<?php echo $this->url('product', array('action'=>'edit')); ?>">Edituj</a>
+		</div>
+
+
 		
 		
 	

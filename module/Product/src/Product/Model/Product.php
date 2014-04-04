@@ -45,6 +45,12 @@ class Product implements InputFilterAwareInterface
         $this->category_id  = (!empty($data['category_id']))  ? $data['category_id']  : null;
 	}
 
+     public function getArrayCopy()
+     {
+         return get_object_vars($this);
+     }
+
+
 	public function setInputFilter(InputFilterInterface $inputFilter) {
 		throw new Exception("Nepoužité");
 		

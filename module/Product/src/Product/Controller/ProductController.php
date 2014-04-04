@@ -94,7 +94,7 @@ class ProductController extends AbstractActionController
                  $product->exchangeArray($form->getData());
                  $this->getProductTable()->saveProduct($product);
 
-                 // Redirect to list of albums
+                 
                  return $this->redirect()->toRoute('product');
              }
          }
@@ -103,6 +103,50 @@ class ProductController extends AbstractActionController
 
      public function editAction()
      {
+        $id = (int) $this->params()->fromRoute('id',0);
+        if(!$id)
+        {
+            return $this->redirect()->toRoute('product', array(
+                'action' => 'add'
+                ));
+        }
+
+        try 
+        {
+          $product = $this->getProductTable()->getProduct($id);
+          $category = $this->getCategoryTable()->getCategory($product->category_id);  
+        }
+
+        catch(\Exception $ex)
+        {
+            return $this->redirect()->toRoute('product', array(
+                'action' => 'index'
+                ));
+        }
+
+        $form = new ProductForm($category_options);
+        $form->bind($product);
+        $form->get('submit')->setAttribute('value', 'edit');
+
+        $request = $this->getRequest();
+        if($request->isPost())
+        {
+            $form->setInputFilter($product->getInputFilter());
+            $form->setData($request->getPost());
+
+            if($form->isValid())
+            {
+                $this->getProductTable()->saveProduct($product);
+                //Redirect po ulozeni
+                return $this->redirect()->toRoute('product');
+            }
+        }
+
+        return array(
+            'id'    => $id,
+            'form'  => $form
+            );
+
      }
 
      public function deleteAction()
