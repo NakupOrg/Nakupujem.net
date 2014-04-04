@@ -27,7 +27,7 @@ $this->headTitle($title);
 			<p>
 			Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span>
 			</div>
-			<a class="btn btn-primary" href="<?php echo $this->url('product', array('action'=>'edit')); ?>">Edituj</a>
+			<a class="btn btn-primary" href="<?php echo $this->url('product', array('action'=>'edit', 'id'=>$product->id)); ?>">Edituj</a>
 		</div>
 
 

@@ -124,10 +124,15 @@ class ProductController extends AbstractActionController
                 'action' => 'index'
                 ));
         }
+        $categories = $this->getCategoryTable()->fetchAll();
+        $category_options = array();
+           foreach ($categories as $category) {
+                $category_options[$category->id] = $category->name;
+            }
 
         $form = new ProductForm($category_options);
         $form->bind($product);
-        $form->get('submit')->setAttribute('value', 'edit');
+        $form->get('submit')->setAttribute('value', 'Edit')->setAttribute('class', 'btn btn-primary');
 
         $request = $this->getRequest();
         if($request->isPost())
