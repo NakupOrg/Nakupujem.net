@@ -100,6 +100,7 @@ class ProductForm extends Form
              'attributes' => array(
                  'value' => 'Choď',
                  'id' => 'submitbutton',
+                 'class' => 'btn btn-primary'
              ),
          ));
 	}

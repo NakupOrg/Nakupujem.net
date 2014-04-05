@@ -1,9 +1,9 @@
 <?php
 $title = 'Zmazať?';
- $this->headTitle($title);
+$this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-<div class="well">Ste si istý, že chcete zmazať <b><?php $this->escapeHtml($product->title); ?></b>?</div>
+<div class="well">Ste si istý, že chcete zmazať <b><?php echo $this->escapeHtml($product->title); ?></b>?</div>
 <?php
  $url = $this->url('product', array(
      'action' => 'delete',
@@ -13,8 +13,7 @@ $title = 'Zmazať?';
  <form action="<?php echo $url; ?>" method="post">
  <div>
      <input type="hidden" name="id" value="<?php echo (int) $product->id; ?>" />
-     <input type="submit" name="del" value="Yes"><b class="glyphicon glyphicon-remove"></b>&nbsp;Zmaž</input>
-     <input type="submit" name="del" value="No"><b class="glyphicon glyphicon-arrow-right"></b>&nbsp;Nezmazať</input>
+     <button class="btn btn-danger" type="submit" name="del" value="Yes"><b class="glyphicon glyphicon-remove"></b>&nbsp;Zmaž</button>&nbsp;
+     <button class="btn btn-success" type="submit" name="del" value="No"><b class="glyphicon glyphicon-arrow-right"></b>&nbsp;Nezmazať</button>
  </div>
  </form>
- ?>

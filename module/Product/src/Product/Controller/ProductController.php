@@ -1,8 +1,8 @@
-<?php 
-/* **Product Controller** 
+<?php
+/* **Product Controller**
 * module/Product/src/Product/Controller/ProductController.php
 *
-* 
+*
 *
 *
 *
@@ -28,7 +28,7 @@ class ProductController extends AbstractActionController
              $sm = $this->getServiceLocator();
              $this->productTable = $sm->get('Product\Model\ProductTable');
          }
-         return $this->productTable; 
+         return $this->productTable;
      }
 
     public function getCategoryTable() {
@@ -44,7 +44,7 @@ class ProductController extends AbstractActionController
      {
           return new ViewModel(array(
              'products' => $this->getProductTable()->fetchAll(),
-             )); 
+             ));
      }
 
      public function showAction()
@@ -57,7 +57,7 @@ class ProductController extends AbstractActionController
         }
 
         try {
-             $product  = $this->getProductTable()->getProduct($id);
+             $product = $this->getProductTable()->getProduct($id);
              $category = $this->getCategoryTable()->getCategory($product->category_id);
          }
          catch (\Exception $ex) {
@@ -71,7 +71,7 @@ class ProductController extends AbstractActionController
        return new ViewModel(array(
              'product' => $product,
              'category' => $category,
-             ));  
+             ));
      }
 
      public function addAction()
@@ -112,10 +112,10 @@ class ProductController extends AbstractActionController
                 ));
         }
 
-        try 
+        try
         {
           $product = $this->getProductTable()->getProduct($id);
-          $category = $this->getCategoryTable()->getCategory($product->category_id);  
+          $category = $this->getCategoryTable()->getCategory($product->category_id);
         }
 
         catch(\Exception $ex)
@@ -149,8 +149,8 @@ class ProductController extends AbstractActionController
         }
 
         return array(
-            'id'    => $id,
-            'form'  => $form
+            'id' => $id,
+            'form' => $form
             );
 
      }
@@ -158,24 +158,26 @@ class ProductController extends AbstractActionController
      public function deleteAction()
      {
         $id = (int) $this->params()->fromRoute('id', 0);
-         if (!$id) 
+         if (!$id)
         {
             return $this->redirect()->toRoute('product');
         }
+        // ......
         $request = $this->getRequest();
-        if ($request->isPost()) 
+        
+        if ($request->isPost())
         {
             $del = $request->getPost('del', 'No');
-        }
-        if ($del == 'Yes') 
-        {
+        if ($del == 'Yes')
+            {
             $id = (int) $request->getPost('id');
             $this->getProductTable()->deleteProduct($id);
-        }
+            }
 
         return $this->redirect()->toRoute('product');
+        }
         return array(
-             'id'    => $id,
+             'id' => $id,
              'product' => $this->getProductTable()->getProduct($id)
          );
  }
