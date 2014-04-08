@@ -20,6 +20,18 @@ class CategoryTable
 		return $resultSet;
 	}
 
+	public function getCategoryNames()
+	{
+		$results = $this->fetchAll();
+		$categories = array();
+
+		foreach ($results as $result) {
+			$categories[$result->id] = $result->name;
+		}
+
+		return $categories;
+	}
+
 	public function getCategory($id) {
 		$id = (int) $id;
 		$rowset = $this->tableGateway->select(array('id' => $id));

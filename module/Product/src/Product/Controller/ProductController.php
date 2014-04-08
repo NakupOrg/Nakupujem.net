@@ -44,6 +44,7 @@ class ProductController extends AbstractActionController
      {
           return new ViewModel(array(
              'products' => $this->getProductTable()->fetchAll(),
+             'categories' => $this->getCategoryTable()->getCategoryNames(),
              ));
      }
 

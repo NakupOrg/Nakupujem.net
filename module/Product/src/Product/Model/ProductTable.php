@@ -18,6 +18,18 @@ namespace Product\Model;
          return $resultSet;
      }
 
+     public function getCategoryNames()
+{
+     // query to get list of names and ids
+
+     // return array of category names, keyed by id
+     $categories = array();
+     foreach ($results as $result) {
+          $categories[$result['id']] = $result['name'];
+     }
+     return $categories;
+}
+
      public function getProduct($id)
      {
          $id  = (int) $id;
