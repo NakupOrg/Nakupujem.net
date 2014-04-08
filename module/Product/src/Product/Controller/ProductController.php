@@ -181,5 +181,6 @@ class ProductController extends AbstractActionController
              'product' => $this->getProductTable()->getProduct($id)
          );
  }
+
 }
 ?>

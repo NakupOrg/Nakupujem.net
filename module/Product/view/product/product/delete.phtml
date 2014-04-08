@@ -3,7 +3,7 @@ $title = 'Zmazať?';
 $this->headTitle($title);
 ?>
 <h1><?php echo $this->escapeHtml($title); ?></h1>
-<div class="well">Ste si istý, že chcete zmazať <b><?php echo $this->escapeHtml($product->title); ?></b>?</div>
+<div class="well">Ste si istý, že chcete zmazať <b><?php echo $this->escapeHtml($product->title); ?></b>? Zmazaný inzerát už nebudete môcť vrátiť späť.</div>
 <?php
  $url = $this->url('product', array(
      'action' => 'delete',
