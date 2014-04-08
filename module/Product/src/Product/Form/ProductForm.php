@@ -93,6 +93,7 @@ class ProductForm extends Form
 					),
 				),
 			));
+		
 
 		$this->add(array(
              'name' => 'submit',

@@ -19,15 +19,20 @@ if (!$count%4)
       <div class="caption">
         <h3><?php echo $this->escapeHtml($product->title); ?></h3>
         <p>
-            <?php echo $this->escapeHtml($product->description); ?>
-            <br>
-            Kategória: 
-            <?php echo $categories[$product->category_id]; ?>
+            <?php echo $this->escapeHtml($product->description); ?> 
         </p>
-        <p>
-            Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span>
-        </p>
-        <h4>Cena:  <span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span></h4>
+          <table>
+            <tr>
+              <td>Kategória:</td> <td><span class="label label-warning">
+            <?php echo $categories[$product->category_id]; ?></span></td>
+            </tr>
+            <tr>
+              <td>Lokalita: </td><td><span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span></td>
+            </tr>
+            <tr>
+            <td>Cena: </td><td><span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span></td>
+            </tr>
+        </table>      
       </div>
   </a>
   </div>

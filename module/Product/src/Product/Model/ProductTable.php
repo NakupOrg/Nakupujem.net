@@ -18,17 +18,6 @@ namespace Product\Model;
          return $resultSet;
      }
 
-     public function getCategoryNames()
-{
-     // query to get list of names and ids
-
-     // return array of category names, keyed by id
-     $categories = array();
-     foreach ($results as $result) {
-          $categories[$result['id']] = $result['name'];
-     }
-     return $categories;
-}
 
      public function getProduct($id)
      {
@@ -39,6 +28,17 @@ namespace Product\Model;
              throw new \Exception("Could not find row $id");
          }
          return $row;
+     }
+
+     public function getProductByCategory($category_id)
+     {
+        $category_id = (int) $category_id;
+        $rowset->this->tableGateway->select(array('category_id' => $category_id));
+        $row = $rowset->current();
+        if(!$row) {
+            throw new \Exception("Count not find row $category_id");
+        }
+        return $row;
      }
 
      public function saveProduct(Product $product)
