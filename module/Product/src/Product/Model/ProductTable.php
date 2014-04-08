@@ -30,15 +30,11 @@ namespace Product\Model;
          return $row;
      }
 
-     public function getProductByCategory($category_id)
+     public function getProductsByCategory($category_id)
      {
         $category_id = (int) $category_id;
-        $rowset->this->tableGateway->select(array('category_id' => $category_id));
-        $row = $rowset->current();
-        if(!$row) {
-            throw new \Exception("Count not find row $category_id");
-        }
-        return $row;
+        $resultSet = $this->tableGateway->select(array('category_id' => $category_id));
+        return $resultSet;
      }
 
      public function saveProduct(Product $product)

@@ -190,5 +190,32 @@ class ProductController extends AbstractActionController
             ));
 
      }
+
+     public function categoryAction() 
+     {
+        $category_id = (int) $this->params()->fromRoute('id', 0);
+        if (!$category_id)
+        {
+            return $this->redirect()->toRoute('product', array(
+                'action' => 'categories'
+                ));
+        }
+
+         try {
+             $product = $this->getProductTable()->getProductsByCategory($category_id);
+             $category = $this->getCategoryTable()->getCategory($category_id);
+         }
+         catch (\Exception $ex) {
+             
+             return $this->redirect()->toRoute('product', array(
+                 'action' => 'categories'
+             ));
+         }
+
+         return new ViewModel(array(
+            'products' => $product,
+            'category' => $category,
+            ));
+     }
 }
 ?>

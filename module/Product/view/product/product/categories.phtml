@@ -10,7 +10,7 @@ $this->headTitle($title);
 	<div class="col-md-6 col-lg-6">
 		<h2>Kategórie:</h2> 
 		<?php foreach ($categories as $category) : ?>
-			<a href='#'><?php echo $this->escapeHtml($category->name); ?> </a>
+			<a href="<?php echo $this->url('product', array('action' => 'category', 'id' => $category->id)) ?>"><?php echo $this->escapeHtml($category->name); ?> </a>
 			<br>
 			
 		<?php endforeach; ?>
