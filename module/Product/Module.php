@@ -65,6 +65,22 @@ class Module
                     //when you return the tableGateway to the CategoryTable factory
                     return new TableGateway('category', $dbAdapter, null, $resultSetPrototype);
                 },
+                'Product\Model\PhotoTable' =>  function($sm)
+                {
+                    //get the tableGateway just below in his own factory
+                    $tableGateway = $sm->get('PhotoTableGateway');
+                    //inject the tableGateway in the Table
+                    $table = new PhotoTable($tableGateway);
+                    return $table;
+                },
+                'PhotoTableGateway' => function($sm)
+                {
+                    //get adapter to donnect dataBase
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Photo());
+                    return new TableGateway('photos', $dbAdapter, null, $resultSetPrototype);
+                },
              ),
          );
      }

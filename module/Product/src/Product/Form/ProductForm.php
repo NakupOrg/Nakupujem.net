@@ -93,7 +93,8 @@ class ProductForm extends Form
 					),
 				),
 			));
-		
+
+		$this->addPhotos();
 
 		$this->add(array(
              'name' => 'submit',
@@ -105,6 +106,15 @@ class ProductForm extends Form
              ),
          ));
 	}
+
+	public function addPhotos()
+    {
+        // File Input
+        $file = new Element\File('image-file');
+        $file->setLabel('Foto pre inzerát')
+             ->setAttribute('id', 'image-file');
+        $this->add($file);
+    }
 }
 
 ?>
