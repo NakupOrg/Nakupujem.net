@@ -17,10 +17,16 @@ $this->headTitle($title);
 			Email: <?php echo $this->escapeHtml($product->email); ?>
 			</p>
 			<p>
-			Kategória: <span class="label label-warning"><?php echo $this->escapeHtml($category->name); ?></span><br />
-			Odosiela do:<?php echo $this->escapeHtml($product->shipping); ?><br />
-			Lokalita: <span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span><br />
-			<h5><b>Cena: <span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span></b></h5>
+				<table>
+					<tr>
+					<td>Odosiela do:</td><td><?php echo $this->escapeHtml($product->shipping); ?></td>
+					</tr>
+					<tr>
+					<td>Kategória: </td><td><span class="label label-warning"><?php echo $this->escapeHtml($category->name); ?></span></td></tr><tr>
+					<td>Lokalita: </td><td><span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span></td>
+					</tr><tr>
+					<td><b>Cena: </td><td><span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span></b></td></tr>
+				</table>
 			</p>
 			</div>
 			<a class="btn btn-primary" href="<?php echo $this->url('product', array('action'=>'edit', 'id'=>$product->id)); ?>"><b class="glyphicon glyphicon-edit"></b>&nbsp;Edituj</a>
