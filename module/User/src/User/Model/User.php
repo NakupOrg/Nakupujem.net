@@ -2,7 +2,11 @@
 
 namespace User\Model;
 
-class User 
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
+class User implements InputFilterAwareInterface
 {
 
 	public $id;
@@ -14,6 +18,8 @@ class User
 	public $email;
 	public $phone;
 
+	protected $inputFilter;
+
 	public function exchangeArray($data)
 	{
 		$this->id 		  = (!empty($data['id'])) 		  ? $data['id'] 		: null;
@@ -24,5 +30,167 @@ class User
 		$this->location   = (!empty($data['location']))   ? $data['location'] 	: null;
 		$this->email      = (!empty($data['email'])) 	  ? $data['email'] 		: null;
 		$this->phone      = (!empty($data['phone'])) 	  ? $data['phone'] 		: null;
+	}
+
+	public function getArrayCopy()
+    {
+        return get_object_vars($this);
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter) {
+		throw new Exception("Nepoužité");
+		
+	}
+
+    public function getInputFilter() {
+		if(!$this->inputFilter) {
+			$inputFilter = new InputFilter();
+
+			$inputFilter->add(array(
+				'name' => 'id',
+				'required' => true,
+				'filters' => array(
+					array('name' => 'Int'),
+				),
+			));
+
+			$inputFilter->add(array(
+                 'name'     => 'username',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'password',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'phone',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'email',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'first_name',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'last_name',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+			$inputFilter->add(array(
+                 'name'     => 'location',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 100,
+                         ),
+                     ),
+                 ),
+             ));
+
+
+			$this->inputFilter = $inputFilter;
+		}
+
+		return $this->inputFilter;
 	}
 }
