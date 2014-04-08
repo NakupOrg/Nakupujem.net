@@ -3,7 +3,7 @@ namespace Product\Model;
 
  use Zend\Db\TableGateway\TableGateway;
 
-class ProductTable
+class PhotoTable
 {
 	protected $tableGateway;
 
