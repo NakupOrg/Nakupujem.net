@@ -2,12 +2,18 @@
 
 namespace Product\Model;
 
-class Photo
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+
+class Photo implements InputFilterAwareInterface
 {
 
 	public $id;
 	public $product_id;
 	public $photo_url;
+
+	protected $inputFilter;
 
 	public function exchangeArray($data)
 	{
@@ -20,4 +26,11 @@ class Photo
      {
          return get_object_vars($this);
      }
+
+     public function setInputFilter(InputFilterInterface $inputFilter) {
+		throw new Exception("Nepoužité");
+		
+	}
+
+
 }

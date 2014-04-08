@@ -2,8 +2,10 @@
 
 namespace Product\Form;
 
+use Zend\InputFilter;
 use Zend\Form\Form;
 use Zend\Form\Element;
+use Zend\Form\Element\File;
 
 class ProductForm extends Form
 {
@@ -112,9 +114,11 @@ class ProductForm extends Form
         // File Input
         $file = new Element\File('image-file');
         $file->setLabel('Foto pre inzerát')
-             ->setAttribute('id', 'image-file');
+             ->setAttribute('id', 'image-file')
+             ->setAttribute('name', 'image-file');
         $this->add($file);
     }
+   
 }
 
 ?>
