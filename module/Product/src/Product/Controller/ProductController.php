@@ -181,6 +181,14 @@ class ProductController extends AbstractActionController
              'id' => $id,
              'product' => $this->getProductTable()->getProduct($id)
          );
- }
+     }
+
+     public function categoriesAction()
+     {
+        return new ViewModel(array(
+           'categories' => $this->getCategoryTable()->fetchAll(),
+            ));
+
+     }
 }
 ?>

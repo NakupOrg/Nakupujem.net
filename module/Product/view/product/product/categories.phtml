@@ -1,0 +1,27 @@
+<?php
+
+$title = "Kategórie";
+$this->headTitle($title);
+?>
+<p>
+
+</p>	
+
+	<div class="col-md-6 col-lg-6">
+		<h2>Kategórie:</h2> 
+		<?php foreach ($categories as $category) : ?>
+			<a href='#'><?php echo $this->escapeHtml($category->name); ?> </a>
+			<br>
+			
+		<?php endforeach; ?>
+		</div>
+
+
+		
+		
+	
+</div>
+
+	<div class="col-md-6 col-lg-6">
+
+	</div>
