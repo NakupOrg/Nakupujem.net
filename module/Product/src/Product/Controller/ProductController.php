@@ -13,6 +13,8 @@ namespace Product\Controller;
  use Zend\View\Model\ViewModel;
  use Product\Model\Product;
  use Product\Form\ProductForm;
+ use Product\Model\Photo;
+  use Product\Model\PhotoTable;
 
 
 
@@ -21,6 +23,7 @@ class ProductController extends AbstractActionController
     protected $productTable;
     protected $categoryTable;
     public $category;
+    public $photoTable;
 
     public function getProductTable()
      {
@@ -37,6 +40,19 @@ class ProductController extends AbstractActionController
                 ->get('Product\Model\CategoryTable');
         }
         return $this->categoryTable;
+    }
+    public function getPhotoTable(){
+        if(!$this->photoTable){
+            $this->photoTable = $this->getServiceLocator()
+                 ->get('Product\Model\PhotoTable');
+        }
+        return $this->photoTable;
+    }
+    public function getFileUploadLocation()
+    {
+    // Fetch Configuration from Module Config
+    $config = $this->getServiceLocator()->get('config');
+    return $config['module_config']['upload_location'];
     }
 
 
@@ -76,7 +92,9 @@ class ProductController extends AbstractActionController
      }
 
      public function addAction()
-     {
+ {
+
+        $uploadFile = $this->params()->fromFiles('fileupload');
         
         $categories = $this->getCategoryTable()->fetchAll();
         $category_options = array();
@@ -88,17 +106,31 @@ class ProductController extends AbstractActionController
 
          $request = $this->getRequest();
          if ($request->isPost()) {
+
+            $uploadPath = $this->getFileUploadLocation();
+            // Save Uploaded file
+            $adapter = new \Zend\File\Transfer\Adapter\Http();
+            $adapter->setDestination($uploadPath);
+            //if ($adapter->receive($uploadFile['name'])) {
+
              $product = new Product();
+             $photo = new Photo();
              $form->setInputFilter($product->getInputFilter());
              $form->setData($request->getPost());
 
              if ($form->isValid()) {
-                 $product->exchangeArray($form->getData());
-                 $this->getProductTable()->saveProduct($product);
-
+                $product->exchangeArray($form->getData());
+                $this->getProductTable()->saveProduct($product);
+                $data = array();
+                $data = $form->getData();
+                $photo->exchangeArray(array(
+                    'photo_url' => $data['fileupload'],
+                    ));
+                 $this->getPhotoTable()->savePhoto($photo);
                  
                  return $this->redirect()->toRoute('product');
-             }
+                }
+             //}
          }
          return array('form' => $form);
      }
@@ -191,7 +223,7 @@ class ProductController extends AbstractActionController
 
      }
 
-     public function categoryAction() 
+     public function categoryAction()
      {
         $category_id = (int) $this->params()->fromRoute('id', 0);
         if (!$category_id)

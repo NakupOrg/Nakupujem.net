@@ -214,6 +214,7 @@ class Product implements InputFilterAwareInterface
 
 		return $this->inputFilter;
 	}
+
 }
 
 
