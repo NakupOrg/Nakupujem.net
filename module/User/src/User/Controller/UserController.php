@@ -39,7 +39,7 @@ class UserController extends AbstractActionController
 				$user->exchangeArray($form->getData());
 				$this->getUserTable()->saveUser($user);
 
-				return $this->redirect()->toRoute('product');
+				return $this->redirect()->toRoute('user');
 			}	
 		}
 
@@ -54,10 +54,57 @@ class UserController extends AbstractActionController
 
 	public function deleteAction()
 	{
+		 $id = (int) $this->params()->fromRoute('id', 0);
+         if (!$id)
+        {
+            return $this->redirect()->toRoute('user');
+        }
+        // ......
+        $request = $this->getRequest();
+        
+        if ($request->isPost())
+        {
+            $del = $request->getPost('del', 'No');
+        if ($del == 'Yes')
+            {
+            $id = (int) $request->getPost('id');
+            $this->getProductTable()->deleteProduct($id);
+            }
 
+        return $this->redirect()->toRoute('user');
+        }
+        return array(
+             'id' => $id,
+             'user' => $this->getUserTable()->getUser($id)
+         );
 	}
 
 	public function showAction()
+	{
+		$id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+             return $this->redirect()->toRoute('user', array(
+                 'action' => 'add'
+             ));
+        }
+
+        try {
+             $user = $this->getUserTable()->getUser($id);
+         }
+         catch (\Exception $ex) {
+             
+             return $this->redirect()->toRoute('user', array(
+                 'action' => 'add'
+             ));
+         }
+
+
+       return new ViewModel(array(
+             'user' => $user,
+             ));
+     }
+
+	public function loginAction()
 	{
 
 	}
