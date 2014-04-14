@@ -106,6 +106,6 @@ class UserController extends AbstractActionController
 
 	public function loginAction()
 	{
-
+        return $this->redirect()->toRoute('product');
 	}
 }

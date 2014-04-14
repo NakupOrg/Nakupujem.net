@@ -12,8 +12,8 @@ class Photo
 	public function exchangeArray($data)
 	{
 		$this->id 			= (!empty($data['id']))   			? $data['id']   		: null;
-		$this->product_id; 	= (!empty($data['product_id;'])) 	? $data['product_id;'] 	: null;
-		$this->photo_url; 	= (!empty($data['photo_url;'])) 	? $data['photo_url;'] 	: null;
+		$this->product_id 	= (!empty($data['product_id'])) 	? $data['product_id'] 	: null;
+		$this->photo_url 	= (!empty($data['photo_url'])) 	? $data['photo_url'] 	: null;
 	}
 	
 	public function getArrayCopy()
