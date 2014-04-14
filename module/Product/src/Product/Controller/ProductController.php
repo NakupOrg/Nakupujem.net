@@ -13,8 +13,8 @@ namespace Product\Controller;
  use Zend\View\Model\ViewModel;
  use Product\Model\Product;
  use Product\Form\ProductForm;
- use Zend\Http\PhpEnvironment\Request;
- use Zend\Filter\File\RenameUpload;
+ use Product\Model\Photo;
+  use Product\Model\PhotoTable;
 
 
 
@@ -23,6 +23,7 @@ class ProductController extends AbstractActionController
     protected $productTable;
     protected $categoryTable;
     public $category;
+    public $photoTable;
 
     public function getProductTable()
      {
@@ -39,6 +40,19 @@ class ProductController extends AbstractActionController
                 ->get('Product\Model\CategoryTable');
         }
         return $this->categoryTable;
+    }
+    public function getPhotoTable(){
+        if(!$this->photoTable){
+            $this->photoTable = $this->getServiceLocator()
+                 ->get('Product\Model\PhotoTable');
+        }
+        return $this->photoTable;
+    }
+    public function getFileUploadLocation()
+    {
+    // Fetch Configuration from Module Config
+    $config = $this->getServiceLocator()->get('config');
+    return $config['module_config']['upload_location'];
     }
 
 
@@ -78,8 +92,10 @@ class ProductController extends AbstractActionController
      }
 
      public function addAction()
-     {
+ {
 
+        $uploadFile = $this->params()->fromFiles('fileupload');
+        
         $categories = $this->getCategoryTable()->fetchAll();
         $category_options = array();
            foreach ($categories as $category) {
@@ -89,57 +105,34 @@ class ProductController extends AbstractActionController
          $form->get('submit')->setValue('Pridať inzerát');
 
          $request = $this->getRequest();
-
-// File upload input
-$file = new FileInput('file');           // Special File Input type
-$file->getValidatorChain()               // Validators are run first w/ FileInput
-     ->addValidator(new Validator\File\UploadFile());
-$file->getFilterChain()                  // Filters are run second w/ FileInput
-     ->attach(new Filter\File\RenameUpload(array(
-         'target'    => './data/tmpuploads/file',
-         'randomize' => true,
-     )));
-
-// Merge $_POST and $_FILES data together
-$request  = new Request();
-$postData = array_merge_recursive($request->getPost(), $request->getFiles());
-
-$inputFilter = new InputFilter();
-$inputFilter->add($description)
-            ->add($file)
-            ->setData($postData);
-
-if ($inputFilter->isValid()) {           // FileInput validators are run, but not the filters...
-    echo "The form is valid\n";
-    $data = $inputFilter->getValues();   // This is when the FileInput filters are run.
-} else {
-    echo "The form is not valid\n";
-    foreach ($inputFilter->getInvalidInput() as $error) {
-        print_r ($error->getMessages());
-    }
-
          if ($request->isPost()) {
 
-            $post = array_merge_recursive(
-            $request->getPost()->toArray(),
-            $request->getFiles()->toArray()
-            );
-             $form->setData($post);
-             $product = new Product();
-             $form->setInputFilter($product->getInputFilter());
+            $uploadPath = $this->getFileUploadLocation();
+            // Save Uploaded file
+            $adapter = new \Zend\File\Transfer\Adapter\Http();
+            $adapter->setDestination($uploadPath);
+            //if ($adapter->receive($uploadFile['name'])) {
 
-             if ($form->isValid()) 
-             {
-                 $data = $form->getData();
-                 echo var_dump($data);
-                 /*$product->exchangeArray($form->getData());
-                 $this->getProductTable()->saveProduct($product);
-                 return $this->redirect()->toRoute('product');*/
-             }
+             $product = new Product();
+             $photo = new Photo();
+             $form->setInputFilter($product->getInputFilter());
+             $form->setData($request->getPost());
+
+             if ($form->isValid()) {
+                $product->exchangeArray($form->getData());
+                $this->getProductTable()->saveProduct($product);
+                $data = array();
+                $data = $form->getData();
+                $photo->exchangeArray(array(
+                    'photo_url' => $data['fileupload'],
+                    ));
+                 $this->getPhotoTable()->savePhoto($photo);
+                 
+                 return $this->redirect()->toRoute('product');
+                }
+             //}
          }
-         return array(
-            'form' => $form,
-            );
+         return array('form' => $form);
      }
 
      public function editAction()
@@ -230,7 +223,7 @@ if ($inputFilter->isValid()) {           // FileInput validators are run, but no
 
      }
 
-     public function categoryAction() 
+     public function categoryAction()
      {
         $category_id = (int) $this->params()->fromRoute('id', 0);
         if (!$category_id)

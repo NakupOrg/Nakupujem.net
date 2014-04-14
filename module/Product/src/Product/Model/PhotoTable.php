@@ -1,7 +1,9 @@
 <?php
+
 namespace Product\Model;
 
- use Zend\Db\TableGateway\TableGateway;
+use Zend\Db\TableGateway\TableGateway;
+use Product\Model\Photo;
 
 class PhotoTable
 {
@@ -12,27 +14,16 @@ class PhotoTable
          $this->tableGateway = $tableGateway;
      }
 
-     public function fetchAll()
-     {
-         $resultSet = $this->tableGateway->select();
-         return $resultSet;
-     }
-     public function getPhoto($id)
-     {
-         $id  = (int) $id;
-         $rowset = $this->tableGateway->select(array('id' => $id));
-         $row = $rowset->current();
-         if (!$row) {
-             throw new \Exception("Could not find row $id");
-         }
-         return $row;
-     }
-	 public function savePhoto(Photo $photo)
-     {
-         $data = array(
-             'id'        	=> $photo->id,
-             'product_id'  	=> $photo->product_id,
-             'photo_url'    => $photo->photo_url,
+	public function getPhotosByProductId($productId)
+	{
+	$productId = (int) $productId;
+	$rowset = $this->tableGateway->select(
+	array('product_id' => $productId));
+	return $rowset;
+	}
+	public function savePhoto(Photo $photo){
+		$data = array(
+             'photo_url' => $photo->photo_url,
             );
 
         $id = (int) $photo->id;
@@ -45,9 +36,24 @@ class PhotoTable
                  throw new \Exception('Photo id does not exist');
              }
          }
-     }
-     public function deletePhoto($id)
-     {
-         $this->tableGateway->delete(array('id' => (int) $id));
-     }
+
+	}
+	public function fetchAll(){
+	$resultSet = $this->tableGateway->select();
+	return $resultSet;
+	}
+	public function deletePhoto($id){
+	$this->tableGateway->delete(array('id' => $id));
+	}
+	public function getPhoto($id){
+	$id = (int) $id;
+	$rowset = $this->tableGateway->select(array('id' => $id));
+	$row = $rowset->current();
+	if (!$row) {
+	throw new \Exception("Could not find row $id");
+	}
+	return $row;	
 }
+
+}
+?>

@@ -29,5 +29,9 @@
               'product' => __DIR__ . '/../view',
         ),
     ),
+      // MODULE CONFIGURATIONS
+    'module_config' => array(
+    'upload_location' => 'D:\Server\htdocs\nakupujem\Nakupujem.net\data\uploads',
+    ),
   );
 ?>
