@@ -17,10 +17,6 @@ $this->add(array(
 'name' => 'id',
 'type' => 'Hidden',
 ));
-$this->add(array(
-'name' => 'photoId',
-'type' => 'Hidden',
-));
 
 $this->add(array(
 'name' => 'title',

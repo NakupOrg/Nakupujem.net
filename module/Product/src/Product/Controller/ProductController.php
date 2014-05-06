@@ -13,8 +13,8 @@ namespace Product\Controller;
  use Zend\View\Model\ViewModel;
  use Product\Model\Product;
  use Product\Form\ProductForm;
- use Product\Model\Photo;
-  use Product\Model\PhotoTable;
+ use Zend\Form\Form;
+ use Zend\Form\Element;
 
 
 
@@ -93,9 +93,6 @@ class ProductController extends AbstractActionController
 
      public function addAction()
  {
-
-        $uploadFile = $this->params()->fromFiles('foto1');
-        
         $categories = $this->getCategoryTable()->fetchAll();
         $category_options = array();
            foreach ($categories as $category) {
@@ -105,28 +102,31 @@ class ProductController extends AbstractActionController
          $form->get('submit')->setValue('Pridať inzerát');
 
          $request = $this->getRequest();
+          
          if ($request->isPost()) {
-
+            
+            $data = array_merge(
+                $this->getRequest()->getPost()->toArray(),
+                $this->getRequest()->getFiles()->toArray()
+                );
             $uploadPath = $this->getFileUploadLocation();
-            // Save Uploaded file
-            $adapter = new \Zend\File\Transfer\Adapter\Http();
-            $adapter->setDestination($uploadPath);
-            //if ($adapter->receive($uploadFile['name'])) {
 
              $product = new Product();
              $form->setInputFilter($product->getInputFilter());
-             $form->setData($request->getPost());
+             $form->setData($data);
 
              if ($form->isValid()) {
-                $product->exchangeArray($form->getData());
-                $this->getProductTable()->saveProduct($product);
-                $data = array();
                 $data = $form->getData();
-                 return $this->redirect()->toRoute('product');
+                $product->exchangeArray($form->getData());
+                move_uploaded_file($data['foto1'], 'D:\Server\htdocs\nakupujem\Nakupujem.net\data\uploads');
+                    $this->getProductTable()->saveProduct($product);
+                var_dump($data['foto1']);                
                 }
              //}
          }
-         return array('form' => $form);
+         return array('form' => $form,
+                      'data'    => $data,
+            );
      }
 
      public function editAction()

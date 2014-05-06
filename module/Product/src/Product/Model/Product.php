@@ -24,6 +24,12 @@ class Product implements InputFilterAwareInterface
 	public $view_counter;
     public $top;
     public $category_id;
+    public $foto1;
+    public $foto2;
+    public $foto3;
+    public $foto4;
+    public $foto5;
+
 
 	protected $inputFilter;
 
