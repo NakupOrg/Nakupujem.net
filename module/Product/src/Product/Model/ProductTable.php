@@ -49,6 +49,12 @@ namespace Product\Model;
              'price'        => $product->price,
              'top'          => $product->top,
              'category_id'  => $product->category_id,
+             'foto1'        => $product->foto1,
+             'foto2'        => $product->foto2,
+             'foto3'        => $product->foto3,
+             'foto4'        => $product->foto4,
+             'foto5'        => $product->foto5,
+
             );
 
         $id = (int) $product->id;

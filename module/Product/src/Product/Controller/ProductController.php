@@ -94,7 +94,7 @@ class ProductController extends AbstractActionController
      public function addAction()
  {
 
-        $uploadFile = $this->params()->fromFiles('fileupload');
+        $uploadFile = $this->params()->fromFiles('foto1');
         
         $categories = $this->getCategoryTable()->fetchAll();
         $category_options = array();
