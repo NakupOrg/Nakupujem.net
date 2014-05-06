@@ -18,9 +18,9 @@ $this->add(array(
 'type' => 'Hidden',
 ));
 $this->add(array(
-	'name' => 'photoId',
-	'type' => 'Hidden',
-	));
+'name' => 'photoId',
+'type' => 'Hidden',
+));
 
 $this->add(array(
 'name' => 'title',
@@ -100,7 +100,7 @@ $this->add(array(
 ));
 
 $this->add(array(
-'name' => 'fileupload',
+'name' => 'foto1',
 'attributes' => array(
 'type' => 'file',
 ),
@@ -108,6 +108,47 @@ $this->add(array(
 'label' => 'Fotky:',
 ),
 ));
+
+$this->add(array(
+'name' => 'foto2',
+'attributes' => array(
+'type' => 'file',
+),
+'options' => array(
+'label' => 'Fotky:',
+),
+));
+
+$this->add(array(
+'name' => 'foto3',
+'attributes' => array(
+'type' => 'file',
+),
+'options' => array(
+'label' => 'Fotky:',
+),
+));
+
+$this->add(array(
+'name' => 'foto4',
+'attributes' => array(
+'type' => 'file',
+),
+'options' => array(
+'label' => 'Fotky:',
+),
+));
+
+$this->add(array(
+'name' => 'foto5',
+'attributes' => array(
+'type' => 'file',
+),
+'options' => array(
+'label' => 'Fotky:',
+),
+));
+
 
 $this->add(array(
              'name' => 'submit',

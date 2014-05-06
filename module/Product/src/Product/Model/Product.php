@@ -43,6 +43,12 @@ class Product implements InputFilterAwareInterface
 		$this->view_counter = (!empty($data['view_counter'])) ? $data['view_counter'] : null;
         $this->top          = (!empty($data['top']))          ? $data['top']          : null;
         $this->category_id  = (!empty($data['category_id']))  ? $data['category_id']  : null;
+        $this->foto1        = (!empty($data['foto1']))        ? $data['foto1']        : null;
+        $this->foto2        = (!empty($data['foto2']))        ? $data['foto2']        : null;
+        $this->foto3        = (!empty($data['foto3']))        ? $data['foto3']        : null;
+        $this->foto4        = (!empty($data['foto4']))        ? $data['foto4']        : null;
+        $this->foto5        = (!empty($data['foto5']))        ? $data['foto5']        : null;
+
 	}
 
      public function getArrayCopy()
