@@ -114,7 +114,6 @@ class ProductController extends AbstractActionController
             //if ($adapter->receive($uploadFile['name'])) {
 
              $product = new Product();
-             $photo = new Photo();
              $form->setInputFilter($product->getInputFilter());
              $form->setData($request->getPost());
 
@@ -123,11 +122,6 @@ class ProductController extends AbstractActionController
                 $this->getProductTable()->saveProduct($product);
                 $data = array();
                 $data = $form->getData();
-                $photo->exchangeArray(array(
-                    'photo_url' => $data['fileupload'],
-                    ));
-                 $this->getPhotoTable()->savePhoto($photo);
-                 
                  return $this->redirect()->toRoute('product');
                 }
              //}
