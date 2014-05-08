@@ -2,7 +2,6 @@
 
 $title = $product->title;
 $this->headTitle($title);
-$uploadPath = 'D:/Server/htdocs/nakupujem/Nakupujem.net/data/uploads/';
 ?>
 
 <p>
@@ -24,7 +23,7 @@ $uploadPath = 'D:/Server/htdocs/nakupujem/Nakupujem.net/data/uploads/';
 					<td>Odosiela do:</td><td><?php echo $this->escapeHtml($product->shipping); ?></td>
 					</tr>
 					<tr>
-					<td>Kategória: </td><td><span class="label label-warning"><?php echo $this->escapeHtml($category->name); ?></span></td></tr><tr>
+					<td>Kategória: </td><td><span class="label label-default"><?php echo $this->escapeHtml($category->name); ?></span></td></tr><tr>
 					<td>Lokalita: </td><td><span class="label label-info"><?php echo $this->escapeHtml($product->location); ?></span></td>
 					</tr><tr>
 					<td><b>Cena: </td><td><span class="label label-success"><?php echo $this->escapeHtml($product->price); ?></span></b></td></tr>
@@ -33,16 +32,36 @@ $uploadPath = 'D:/Server/htdocs/nakupujem/Nakupujem.net/data/uploads/';
 			</div>
 			<a class="btn btn-primary" href="<?php echo $this->url('product', array('action'=>'edit', 'id'=>$product->id)); ?>"><b class="glyphicon glyphicon-edit"></b>&nbsp;Edituj</a>
 			<a class="btn btn-danger" href="<?php echo $this->url('product', array('action'=>'delete', 'id'=>$product->id)); ?>"><b class="glyphicon glyphicon-remove"></b>&nbsp;Zmaž</a>
-		</div>
+		</div>	
 
 
-		
-		
-	
-</div>
 
-<img src="<?php echo $uploadPath.$product->foto1; ?>" />
 
 	<div class="col-md-6 col-lg-6">
 
+<?php
+
+if(!empty($product->foto1)){?>
+<img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto1; ?>" />
+<?php
+}
+if(!empty($product->foto2)){?>
+<img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto2; ?>" />
+<?php
+}
+if(!empty($product->foto3)){?>
+<img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto3; ?>" />
+<?php
+}
+if(!empty($product->foto4)){?>
+<img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto4; ?>" />
+<?php
+}
+if(!empty($product->foto5)){?>
+<img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto5; ?>" />
+<?php
+}
+?>
 	</div>
+
+</div>

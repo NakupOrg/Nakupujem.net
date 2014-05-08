@@ -49,12 +49,25 @@ class ProductController extends AbstractActionController
         }
         return $this->photoTable;
     }
+
     public function getFileUploadLocation()
     {
     // Fetch Configuration from Module Config
     $config = $this->getServiceLocator()->get('config');
     return $config['module_config']['upload_location'];
     }
+
+    public function random_string($length) 
+    {
+    $key = '';
+    $keys = array_merge(range(0, 9), range('a', 'z'));
+
+    for ($i = 0; $i < $length; $i++) {
+        $key .= $keys[array_rand($keys)];
+    }
+
+    return $key;
+}
 
 
      public function indexAction()
@@ -115,31 +128,42 @@ class ProductController extends AbstractActionController
             );*/
              $product = new Product();
              
-                $foto1 = $_FILES["foto1"]["name"];
+                $randomId1 = rand(0,999999999999999);
+                $randomId11= rand(0,999999999999999);
+                $foto1 = $_FILES["foto1"]["name"].$randomId1.$randomId11;
                 $tmp_name1 = $_FILES['foto1']['tmp_name'];
                 $error1 = $_FILES['foto1']['error'];
                 move_uploaded_file($tmp_name1,$uploadPath.$foto1);
                 $data['foto1'] = $foto1;
 
-                $foto2 = $_FILES["foto2"]["name"];
+
+                $randomId2 = rand(000000000000000,999999999999999);
+                $randomId21= rand(000000000000000,999999999999999);
+                $foto2 = $_FILES["foto2"]["name"].$randomId2.$randomId21;
                 $tmp_name2 = $_FILES['foto2']['tmp_name'];
                 $error2 = $_FILES['foto2']['error'];
                 move_uploaded_file($tmp_name2,$uploadPath.$foto2);
                 $data['foto2'] = $foto2;
 
-                $foto3 = $_FILES["foto3"]["name"];
+                $randomId3 = rand(000000000000000,999999999999999);
+                $randomId31= rand(000000000000000,999999999999999);
+                $foto3 = $_FILES["foto3"]["name"].$randomId3.$randomId31;
                 $tmp_name3 = $_FILES['foto3']['tmp_name'];
                 $error3 = $_FILES['foto3']['error'];
                 move_uploaded_file($tmp_name3,$uploadPath.$foto3);
                 $data['foto3'] = $foto3;
 
-                $foto4 = $_FILES["foto4"]["name"];
+                $randomId4 = rand(000000000000000,999999999999999);
+                $randomId41= rand(000000000000000,999999999999999);
+                $foto4 = $_FILES["foto4"]["name"].$randomId4.$randomId41;
                 $tmp_name4 = $_FILES['foto4']['tmp_name'];
                 $error4 = $_FILES['foto4']['error'];
                 move_uploaded_file($tmp_name4,$uploadPath.$foto4);
                 $data['foto4'] = $foto4;
 
-                $foto5 = $_FILES["foto5"]["name"];
+                $randomId5 = rand(000000000000000,999999999999999);
+                $randomId51= rand(000000000000000,999999999999999);
+                $foto5 = $_FILES["foto5"]["name"].$randomId5.$randomId51;
                 $tmp_name5 = $_FILES['foto5']['tmp_name'];
                 $error5 = $_FILES['foto5']['error'];
                 move_uploaded_file($tmp_name5,$uploadPath.$foto5);
