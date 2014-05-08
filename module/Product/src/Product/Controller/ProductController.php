@@ -25,6 +25,10 @@ class ProductController extends AbstractActionController
     public $category;
     public $photoTable;
 
+    public function random()
+    {
+        return rand(000000000000000,999999999999999).rand(000000000000000,999999999999999);
+    }
 
     public function getProductTable()
      {
@@ -128,42 +132,32 @@ class ProductController extends AbstractActionController
             );*/
              $product = new Product();
              
-                $randomId1 = rand(0,999999999999999);
-                $randomId11= rand(0,999999999999999);
-                $foto1 = $_FILES["foto1"]["name"].$randomId1.$randomId11;
+
+                $foto1 = $_FILES["foto1"]["name"].$this->random();
                 $tmp_name1 = $_FILES['foto1']['tmp_name'];
                 $error1 = $_FILES['foto1']['error'];
                 move_uploaded_file($tmp_name1,$uploadPath.$foto1);
                 $data['foto1'] = $foto1;
 
-
-                $randomId2 = rand(000000000000000,999999999999999);
-                $randomId21= rand(000000000000000,999999999999999);
-                $foto2 = $_FILES["foto2"]["name"].$randomId2.$randomId21;
+                $foto2 = $_FILES["foto2"]["name"].$this->random();
                 $tmp_name2 = $_FILES['foto2']['tmp_name'];
                 $error2 = $_FILES['foto2']['error'];
                 move_uploaded_file($tmp_name2,$uploadPath.$foto2);
                 $data['foto2'] = $foto2;
 
-                $randomId3 = rand(000000000000000,999999999999999);
-                $randomId31= rand(000000000000000,999999999999999);
-                $foto3 = $_FILES["foto3"]["name"].$randomId3.$randomId31;
+                $foto3 = $_FILES["foto3"]["name"].$this->random();
                 $tmp_name3 = $_FILES['foto3']['tmp_name'];
                 $error3 = $_FILES['foto3']['error'];
                 move_uploaded_file($tmp_name3,$uploadPath.$foto3);
                 $data['foto3'] = $foto3;
 
-                $randomId4 = rand(000000000000000,999999999999999);
-                $randomId41= rand(000000000000000,999999999999999);
-                $foto4 = $_FILES["foto4"]["name"].$randomId4.$randomId41;
+                $foto4 = $_FILES["foto4"]["name"].$this->random();
                 $tmp_name4 = $_FILES['foto4']['tmp_name'];
                 $error4 = $_FILES['foto4']['error'];
                 move_uploaded_file($tmp_name4,$uploadPath.$foto4);
                 $data['foto4'] = $foto4;
 
-                $randomId5 = rand(000000000000000,999999999999999);
-                $randomId51= rand(000000000000000,999999999999999);
-                $foto5 = $_FILES["foto5"]["name"].$randomId5.$randomId51;
+                $foto5 = $_FILES["foto5"]["name"].$this->random();
                 $tmp_name5 = $_FILES['foto5']['tmp_name'];
                 $error5 = $_FILES['foto5']['error'];
                 move_uploaded_file($tmp_name5,$uploadPath.$foto5);
