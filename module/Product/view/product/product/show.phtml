@@ -2,8 +2,9 @@
 
 $title = $product->title;
 $this->headTitle($title);
-$uploadPath = '';
+$uploadPath = 'D:/Server/htdocs/nakupujem/Nakupujem.net/uploads/';
 ?>
+
 <p>
 
 </p>	
@@ -40,8 +41,8 @@ $uploadPath = '';
 	
 </div>
 
-
+<img src="<?php echo $uploadPath.$product->foto1; ?>" />
 
 	<div class="col-md-6 col-lg-6">
-<img scr="<?php echo $uploadPath.$product->foto1; ?>" />
+
 	</div>
