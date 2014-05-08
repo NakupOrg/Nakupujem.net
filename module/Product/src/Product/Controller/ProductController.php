@@ -25,6 +25,7 @@ class ProductController extends AbstractActionController
     public $category;
     public $photoTable;
 
+
     public function getProductTable()
      {
         if (!$this->productTable) {
@@ -102,31 +103,60 @@ class ProductController extends AbstractActionController
          $form->get('submit')->setValue('Pridať inzerát');
 
          $request = $this->getRequest();
+         
           
          if ($request->isPost()) {
             
-            $data = array_merge(
-                $this->getRequest()->getPost()->toArray(),
-                $this->getRequest()->getFiles()->toArray()
-                );
+            $data = $this->getRequest()->getPost();
             $uploadPath = $this->getFileUploadLocation();
 
+            /*$data = array_merge_recursive(
+            $request->getPost()->toArray()
+            );*/
              $product = new Product();
-             $form->setInputFilter($product->getInputFilter());
-             $form->setData($data);
+             
+                $foto1 = $_FILES["foto1"]["name"];
+                $tmp_name1 = $_FILES['foto1']['tmp_name'];
+                $error1 = $_FILES['foto1']['error'];
+                move_uploaded_file($tmp_name1,$uploadPath.$foto1);
+                $data['foto1'] = $foto1;
+
+                $foto2 = $_FILES["foto2"]["name"];
+                $tmp_name2 = $_FILES['foto2']['tmp_name'];
+                $error2 = $_FILES['foto2']['error'];
+                move_uploaded_file($tmp_name2,$uploadPath.$foto2);
+                $data['foto2'] = $foto2;
+
+                $foto3 = $_FILES["foto3"]["name"];
+                $tmp_name3 = $_FILES['foto3']['tmp_name'];
+                $error3 = $_FILES['foto3']['error'];
+                move_uploaded_file($tmp_name3,$uploadPath.$foto3);
+                $data['foto3'] = $foto3;
+
+                $foto4 = $_FILES["foto4"]["name"];
+                $tmp_name4 = $_FILES['foto4']['tmp_name'];
+                $error4 = $_FILES['foto4']['error'];
+                move_uploaded_file($tmp_name4,$uploadPath.$foto4);
+                $data['foto4'] = $foto4;
+
+                $foto5 = $_FILES["foto5"]["name"];
+                $tmp_name5 = $_FILES['foto5']['tmp_name'];
+                $error5 = $_FILES['foto5']['error'];
+                move_uploaded_file($tmp_name5,$uploadPath.$foto5);
+                $data['foto5'] = $foto5;
+                $form->setInputFilter($product->getInputFilter());
+                $form->setData($data);
+
 
              if ($form->isValid()) {
                 $data = $form->getData();
                 $product->exchangeArray($form->getData());
-                move_uploaded_file($data['foto1'], 'D:\Server\htdocs\nakupujem\Nakupujem.net\data\uploads');
-                    $this->getProductTable()->saveProduct($product);
-                var_dump($data['foto1']);                
-                }
+                $this->getProductTable()->saveProduct($product);     
+               return $this->redirect()->toRoute('product');             
+            }
              //}
          }
-         return array('form' => $form,
-                      'data'    => $data,
-            );
+         return array('form' => $form);
      }
 
      public function editAction()

@@ -12,7 +12,7 @@ public function __construct($category_options)
 {
 
 parent::__construct('product');
-
+$this->addElements();
 $this->add(array(
 'name' => 'id',
 'type' => 'Hidden',
@@ -156,6 +156,14 @@ $this->add(array(
              ),
          ));
 }
+public function addElements()
+    {
+        // File Input
+        $file = new Element\File('image-file');
+        $file->setLabel('Avatar Image Upload')
+             ->setAttribute('id', 'image-file');
+        $this->add($file);
+    }
 
 }
 
