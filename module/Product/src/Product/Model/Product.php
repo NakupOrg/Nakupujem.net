@@ -45,7 +45,7 @@ class Product implements InputFilterAwareInterface
 		$this->shipping    	= (!empty($data['shipping'])) 	  ? $data['shipping'] 	  : null;
 		$this->user_id     	= (!empty($data['user_id'])) 	  ? $data['user_id'] 	  : null;
 		$this->price       	= (!empty($data['price'])) 		  ? $data['price'] 		  : null;
-		//$this->date 	   	= (!empty($data['date'])) 		  ? $date['date'] 		  : null;
+		$this->date 	   	= (!empty($data['date'])) 		  ? $data['date'] 		  : null;
 		$this->view_counter = (!empty($data['view_counter'])) ? $data['view_counter'] : null;
         $this->top          = (!empty($data['top']))          ? $data['top']          : null;
         $this->category_id  = (!empty($data['category_id']))  ? $data['category_id']  : null;

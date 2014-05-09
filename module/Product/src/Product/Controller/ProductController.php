@@ -242,7 +242,11 @@ class ProductController extends AbstractActionController
             {    
             $id = (int) $request->getPost('id');
             $product = $this->getProductTable()->getProduct($id);
-            unlink('D:/GitHub/Nakupujem/zf/public/img/uploads/'.$product->foto1);
+            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto1);
+            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto2);
+            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto3);
+            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto4);
+            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto5);
             $this->getProductTable()->deleteProduct($id);
             }
 
