@@ -11,6 +11,7 @@ class UserController extends AbstractActionController
 {
 
 	protected $userTable;
+    protected $productTable;
 
 	public function getUserTable()
     {
@@ -19,6 +20,15 @@ class UserController extends AbstractActionController
             $this->userTable = $sm->get('User\Model\UserTable');
         }
         return $this->userTable;
+     }
+
+    public function getProductTable()
+     {
+        if (!$this->productTable) {
+             $sm = $this->getServiceLocator();
+             $this->productTable = $sm->get('Product\Model\ProductTable');
+         }
+         return $this->productTable;
      }
 
 	public function addAction()
@@ -90,6 +100,7 @@ class UserController extends AbstractActionController
 
         try {
              $user = $this->getUserTable()->getUser($id);
+             $products = $this->getProductTable()->getProductsByUser($user->id);
          }
          catch (\Exception $ex) {
              
@@ -101,6 +112,7 @@ class UserController extends AbstractActionController
 
        return new ViewModel(array(
              'user' => $user,
+             'products' => $products,
              ));
      }
 

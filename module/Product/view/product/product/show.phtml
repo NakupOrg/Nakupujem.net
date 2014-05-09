@@ -14,7 +14,8 @@ $this->headTitle($title);
 			<h5><?php echo $this->escapeHtml($product->description); ?></h5>
 			<div class="well">
 			<p>
-			<h4>Inzerát pridal užívateľ: <?php echo $this->escapeHtml($user->username); ?></h4>
+			<h4>Inzerát pridal užívateľ: <a href="<?php echo $this->url('user', array('action'=>'show','id'=>$product->user_id)); ?>">
+			<?php echo $this->escapeHtml($user->username); ?></a></h4>
 			Telefónne číslo: <?php echo $this->escapeHtml($product->phone); ?><br />
 			Email: <?php echo $this->escapeHtml($product->email); ?>
 			</p>

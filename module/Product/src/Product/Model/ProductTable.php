@@ -30,7 +30,7 @@ namespace Product\Model;
          return $row;
      }
 
-     public function getProductByUserId($id)
+     public function getProductsByUser($id)
      {
         $id = (int) $id;
         $resultSet = $this->tableGateway->select(array('user_id' => $id));
