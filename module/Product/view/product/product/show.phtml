@@ -43,23 +43,23 @@ $this->headTitle($title);
 
 <?php
 
-if($product->foto1!='NULL'){?>
+if(!empty($product->foto1)){?>
 <img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto1; ?>" />
 <?php
 }
-if($product->foto2!='NULL'){?>
+if(!empty($product->foto2)){?>
 <img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto2; ?>" />
 <?php
 }
-if($product->foto3!='NULL'){?>
+if(!empty($product->foto3)){?>
 <img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto3; ?>" />
 <?php
 }
-if($product->foto4!='NULL'){?>
+if(!empty($product->foto4)){?>
 <img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto4; ?>" />
 <?php
 }
-if($product->foto5!='NULL'){?>
+if(!empty($product->foto5)){?>
 <img id="productFoto" src="<?php echo $this->basePath('img/uploads/').$product->foto5; ?>" />
 <?php
 }

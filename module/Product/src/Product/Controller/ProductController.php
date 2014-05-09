@@ -29,11 +29,18 @@ class ProductController extends AbstractActionController
     public function loadFotos($photo_id)
     {
         $uploadPath = $this->getFileUploadLocation();
-        $foto = $_FILES[$photo_id]["name"].$this->random();
-        $tmp_name = $_FILES[$photo_id]['tmp_name'];
-        $error = $_FILES[$photo_id]['error'];
-        move_uploaded_file($tmp_name,$uploadPath.$foto);
-        return $foto;
+        if(!empty($_FILES[$photo_id]["name"]))
+        {
+            $foto = $_FILES[$photo_id]["name"].$this->random();
+            $tmp_name = $_FILES[$photo_id]['tmp_name'];
+            $error = $_FILES[$photo_id]['error'];
+            move_uploaded_file($tmp_name,$uploadPath.$foto);
+            return $foto;
+        }
+        else
+        {
+            return;
+        }
     }
 
     public function getProductTable()
