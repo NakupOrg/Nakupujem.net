@@ -30,6 +30,16 @@ class ProductController extends AbstractActionController
         return rand(000000000000000,999999999999999).rand(000000000000000,999999999999999);
     }
 
+    public function loadFotos($photo_id)
+    {
+        $uploadPath = $this->getFileUploadLocation();
+        $foto = $_FILES[$photo_id]["name"].$this->random();
+        $tmp_name = $_FILES[$photo_id]['tmp_name'];
+        $error = $_FILES[$photo_id]['error'];
+        move_uploaded_file($tmp_name,$uploadPath.$foto);
+        return $foto;
+    }
+
     public function getProductTable()
      {
         if (!$this->productTable) {
@@ -125,54 +135,26 @@ class ProductController extends AbstractActionController
          if ($request->isPost()) {
             
             $data = $this->getRequest()->getPost();
-            $uploadPath = $this->getFileUploadLocation();
 
-            /*$data = array_merge_recursive(
-            $request->getPost()->toArray()
-            );*/
              $product = new Product();
              
 
-                $foto1 = $_FILES["foto1"]["name"].$this->random();
-                $tmp_name1 = $_FILES['foto1']['tmp_name'];
-                $error1 = $_FILES['foto1']['error'];
-                move_uploaded_file($tmp_name1,$uploadPath.$foto1);
-                $data['foto1'] = $foto1;
+                $data["foto1"] = $this->loadFotos("foto1");
+                $data["foto2"] = $this->loadFotos("foto2");
+                $data["foto3"] = $this->loadFotos("foto3");
+                $data["foto4"] = $this->loadFotos("foto4");
+                $data["foto5"] = $this->loadFotos("foto5");
 
-                $foto2 = $_FILES["foto2"]["name"].$this->random();
-                $tmp_name2 = $_FILES['foto2']['tmp_name'];
-                $error2 = $_FILES['foto2']['error'];
-                move_uploaded_file($tmp_name2,$uploadPath.$foto2);
-                $data['foto2'] = $foto2;
-
-                $foto3 = $_FILES["foto3"]["name"].$this->random();
-                $tmp_name3 = $_FILES['foto3']['tmp_name'];
-                $error3 = $_FILES['foto3']['error'];
-                move_uploaded_file($tmp_name3,$uploadPath.$foto3);
-                $data['foto3'] = $foto3;
-
-                $foto4 = $_FILES["foto4"]["name"].$this->random();
-                $tmp_name4 = $_FILES['foto4']['tmp_name'];
-                $error4 = $_FILES['foto4']['error'];
-                move_uploaded_file($tmp_name4,$uploadPath.$foto4);
-                $data['foto4'] = $foto4;
-
-                $foto5 = $_FILES["foto5"]["name"].$this->random();
-                $tmp_name5 = $_FILES['foto5']['tmp_name'];
-                $error5 = $_FILES['foto5']['error'];
-                move_uploaded_file($tmp_name5,$uploadPath.$foto5);
-                $data['foto5'] = $foto5;
                 $form->setInputFilter($product->getInputFilter());
                 $form->setData($data);
-
 
              if ($form->isValid()) {
                 $data = $form->getData();
                 $product->exchangeArray($form->getData());
                 $this->getProductTable()->saveProduct($product);     
-               return $this->redirect()->toRoute('product');             
+                return $this->redirect()->toRoute('product');             
             }
-             //}
+            
          }
          return array('form' => $form);
      }
@@ -237,15 +219,16 @@ class ProductController extends AbstractActionController
         {
             return $this->redirect()->toRoute('product');
         }
-        // ......
         $request = $this->getRequest();
         
         if ($request->isPost())
         {
             $del = $request->getPost('del', 'No');
         if ($del == 'Yes')
-            {
+            {    
             $id = (int) $request->getPost('id');
+            $product = $this->getProductTable()->getProduct($id);
+            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto1);
             $this->getProductTable()->deleteProduct($id);
             }
 
