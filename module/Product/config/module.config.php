@@ -31,7 +31,7 @@
     ),
       // MODULE CONFIGURATIONS
     'module_config' => array(
-    'upload_location' => 'D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/',
+    'upload_location' => 'D:/GitHub/Nakupujem/zf/public/img/uploads/',
     ),
   );
 ?>

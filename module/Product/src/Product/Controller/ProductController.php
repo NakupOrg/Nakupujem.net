@@ -1,11 +1,6 @@
 <?php
 /* **Product Controller**
 * module/Product/src/Product/Controller/ProductController.php
-*
-*
-*
-*
-*
 */
 namespace Product\Controller;
 
@@ -22,8 +17,9 @@ class ProductController extends AbstractActionController
  {
     protected $productTable;
     protected $categoryTable;
+    protected $photoTable;
+    protected $userTable;
     public $category;
-    public $photoTable;
 
     public function random()
     {
@@ -47,6 +43,15 @@ class ProductController extends AbstractActionController
              $this->productTable = $sm->get('Product\Model\ProductTable');
          }
          return $this->productTable;
+     }
+
+    public function getUserTable()
+    {
+       if (!$this->userTable) {
+            $sm = $this->getServiceLocator();
+            $this->userTable = $sm->get('User\Model\UserTable');
+        }
+        return $this->userTable;
      }
 
     public function getCategoryTable() {
@@ -104,6 +109,7 @@ class ProductController extends AbstractActionController
         try {
              $product = $this->getProductTable()->getProduct($id);
              $category = $this->getCategoryTable()->getCategory($product->category_id);
+             $user = $this->getUserTable()->getUser($product->user_id);
          }
          catch (\Exception $ex) {
              
@@ -116,6 +122,7 @@ class ProductController extends AbstractActionController
        return new ViewModel(array(
              'product' => $product,
              'category' => $category,
+             'user' => $user,
              ));
      }
 
@@ -228,7 +235,7 @@ class ProductController extends AbstractActionController
             {    
             $id = (int) $request->getPost('id');
             $product = $this->getProductTable()->getProduct($id);
-            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto1);
+            unlink('D:/GitHub/Nakupujem/zf/public/img/uploads/'.$product->foto1);
             $this->getProductTable()->deleteProduct($id);
             }
 
