@@ -16,7 +16,7 @@ $this->headTitle($title);
 			<p>
 			<h4>Inzerát pridal užívateľ: <a href="<?php echo $this->url('user', array('action'=>'show','id'=>$product->user_id)); ?>">
 			<?php echo $this->escapeHtml($user->username); ?></a></h4>
-			Inzerát pridaný dňa: <?php echo $this->escapeHtml($product->date) ?>;<br />
+			Inzerát pridaný dňa: <?php echo $this->escapeHtml(date('d.m.Y \o h:m:s',strtotime($product->date))); ?><br />
 			Telefónne číslo: <?php echo $this->escapeHtml($product->phone); ?><br />
 			Email: <?php echo $this->escapeHtml($product->email); ?>
 			</p>
