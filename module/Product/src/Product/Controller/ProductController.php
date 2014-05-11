@@ -26,7 +26,7 @@ class ProductController extends AbstractActionController
         return rand(000000000000000,999999999999999).rand(000000000000000,999999999999999);
     }
 
-    public function loadFotos($photo_id)
+    public function loadPhotos($photo_id)
     {
         $uploadPath = $this->getFileUploadLocation();
         if(!empty($_FILES[$photo_id]["name"]))
@@ -83,7 +83,7 @@ class ProductController extends AbstractActionController
     return $config['module_config']['upload_location'];
     }
 
-    public function deleteFotos($photo_id, $id)
+    public function deletePhotos($photo_id, $id)
     {
             $product = $this->getProductTable()->getProduct($id);
             unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->$photo_id);
@@ -147,11 +147,11 @@ class ProductController extends AbstractActionController
              $product = new Product();
              
 
-                $data["foto1"] = $this->loadFotos("foto1");
-                $data["foto2"] = $this->loadFotos("foto2");
-                $data["foto3"] = $this->loadFotos("foto3");
-                $data["foto4"] = $this->loadFotos("foto4");
-                $data["foto5"] = $this->loadFotos("foto5");
+                $data["foto1"] = $this->loadPhotos("foto1");
+                $data["foto2"] = $this->loadPhotos("foto2");
+                $data["foto3"] = $this->loadPhotos("foto3");
+                $data["foto4"] = $this->loadPhotos("foto4");
+                $data["foto5"] = $this->loadPhotos("foto5");
 
                 $form->setInputFilter($product->getInputFilter());
                 $form->setData($data);
@@ -235,11 +235,11 @@ class ProductController extends AbstractActionController
         if ($del == 'Yes')
             {    
             $id = (int) $request->getPost('id');
-            $this->deleteFotos('foto1', $id);
-            $this->deleteFotos('foto2', $id);
-            $this->deleteFotos('foto3', $id);
-            $this->deleteFotos('foto4', $id);
-            $this->deleteFotos('foto5', $id);
+            $this->deletePhotos('foto1', $id);
+            $this->deletePhotos('foto2', $id);
+            $this->deletePhotos('foto3', $id);
+            $this->deletePhotos('foto4', $id);
+            $this->deletePhotos('foto5', $id);
             $this->getProductTable()->deleteProduct($id);
             }
 
