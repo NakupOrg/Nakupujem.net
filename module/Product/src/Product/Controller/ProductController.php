@@ -83,17 +83,11 @@ class ProductController extends AbstractActionController
     return $config['module_config']['upload_location'];
     }
 
-    public function random_string($length) 
+    public function deleteFotos($photo_id, $id)
     {
-    $key = '';
-    $keys = array_merge(range(0, 9), range('a', 'z'));
-
-    for ($i = 0; $i < $length; $i++) {
-        $key .= $keys[array_rand($keys)];
+            $product = $this->getProductTable()->getProduct($id);
+            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->$photo_id);
     }
-
-    return $key;
-}
 
 
      public function indexAction()
@@ -241,12 +235,11 @@ class ProductController extends AbstractActionController
         if ($del == 'Yes')
             {    
             $id = (int) $request->getPost('id');
-            $product = $this->getProductTable()->getProduct($id);
-            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto1);
-            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto2);
-            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto3);
-            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto4);
-            unlink('D:/Server/htdocs/nakupujem/Nakupujem.net/public/img/uploads/'.$product->foto5);
+            $this->deleteFotos('foto1', $id);
+            $this->deleteFotos('foto2', $id);
+            $this->deleteFotos('foto3', $id);
+            $this->deleteFotos('foto4', $id);
+            $this->deleteFotos('foto5', $id);
             $this->getProductTable()->deleteProduct($id);
             }
 
