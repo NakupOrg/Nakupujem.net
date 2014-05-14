@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Počítač: 127.0.0.1
--- Vytvořeno: Úte 01. dub 2014, 11:38
+-- Vytvořeno: Stř 14. kvě 2014, 22:25
 -- Verze serveru: 5.6.16
 -- Verze PHP: 5.5.9
 
@@ -23,60 +23,26 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktura tabulky `photos`
---
-
-CREATE TABLE IF NOT EXISTS `photos` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'photo id',
-  `product_id` int(11) NOT NULL COMMENT 'pruduct id',
-  `url` text COLLATE utf8_slovak_ci NOT NULL COMMENT 'url to foto',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovak_ci COMMENT='table of photos' AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Struktura tabulky `product`
---
-
-CREATE TABLE IF NOT EXISTS `product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id of product',
-  `title` varchar(200) COLLATE utf8_slovak_ci NOT NULL COMMENT 'title of product',
-  `description` text COLLATE utf8_slovak_ci NOT NULL COMMENT 'description of product',
-  `phone` varchar(20) COLLATE utf8_slovak_ci NOT NULL COMMENT 'phone number on seller',
-  `email` varchar(50) COLLATE utf8_slovak_ci NOT NULL COMMENT 'email on seller',
-  `location` varchar(60) COLLATE utf8_slovak_ci NOT NULL COMMENT 'location of product',
-  `shipping` int(100) NOT NULL COMMENT 'where can be item shipped',
-  `user_id` int(11) NOT NULL COMMENT 'id of user ',
-  `price` varchar(80) COLLATE utf8_slovak_ci NOT NULL DEFAULT 'Dohodou' COMMENT 'price of product',
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT 'date when inserted',
-  `view_counter` int(11) NOT NULL COMMENT 'counter of views',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`),
-  KEY `price` (`price`),
-  FULLTEXT KEY `title` (`title`,`description`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovak_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
 -- Struktura tabulky `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(16) COLLATE utf8_slovak_ci NOT NULL,
-  `password` varchar(24) COLLATE utf8_slovak_ci NOT NULL,
-  `first_name` varchar(20) COLLATE utf8_slovak_ci NOT NULL,
-  `last_name` varchar(30) COLLATE utf8_slovak_ci NOT NULL,
-  `location` text COLLATE utf8_slovak_ci NOT NULL,
-  `email` varchar(100) COLLATE utf8_slovak_ci DEFAULT NULL,
-  `phone` varchar(20) COLLATE utf8_slovak_ci NOT NULL,
-  `score` float DEFAULT '50',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_slovak_ci COMMENT='table of users' AUTO_INCREMENT=1 ;
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) COLLATE utf16_slovak_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf16_slovak_ci DEFAULT NULL,
+  `display_name` varchar(50) COLLATE utf16_slovak_ci DEFAULT NULL,
+  `password` varchar(128) COLLATE utf16_slovak_ci NOT NULL,
+  `state` smallint(6) DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `username` (`username`,`email`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf16 COLLATE=utf16_slovak_ci AUTO_INCREMENT=2 ;
+
+--
+-- Vypisuji data pro tabulku `user`
+--
+
+INSERT INTO `user` (`user_id`, `username`, `email`, `display_name`, `password`, `state`) VALUES
+(1, NULL, 'frank238238@gmail.com', NULL, '$2y$14$8F81/.wyuy0bbTfCz9c0MeTyU/BwCfekcNvptPoKJHwy9FfGbZ6uG', NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -5,6 +5,8 @@ return array(
         'Application',
         'Product',
         'User',
+        'ZfcBase',
+        'ZfcUser',
         
     ),
 
