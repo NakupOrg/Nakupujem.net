@@ -14,8 +14,7 @@ $this->headTitle($title);
 			<h5><?php echo $this->escapeHtml($product->description); ?></h5>
 			<div class="well">
 			<p>
-			<h4>Inzerát pridal užívateľ: <a href="<?php echo $this->url('user', array('action'=>'show','id'=>$product->user_id)); ?>">
-			<?php echo $this->escapeHtml($user->username); ?></a></h4>
+			<h4>Inzerát pridal užívateľ: <?php if($this->zfcUserIdentity()) { echo $this->zfcUserIdentity()->getEmail(); }?></h4>
 			Inzerát pridaný dňa: <?php echo $this->escapeHtml(date('d.m.Y \o h:m:s',strtotime($product->date))); ?><br />
 			Telefónne číslo: <?php echo $this->escapeHtml($product->phone); ?><br />
 			Email: <?php echo $this->escapeHtml($product->email); ?>

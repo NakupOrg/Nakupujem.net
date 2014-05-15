@@ -41,9 +41,13 @@
                         <li><a href="<?php echo $this->url('product', array('action' => 'categories')) ?>"><?php echo "<b class='glyphicon glyphicon-th-large'></b>"; echo $this->translate(' Kategórie'); ?></a></li>
                         <li><a href="<?php echo $this->url('product', array('action'=>'add')); ?>"><?php echo "<b class='glyphicon glyphicon-plus'></b>"; echo $this->translate(' Pridať nový inzerát'); ?></a></li>
                     </ul>
-                    <ul class="nav navbar-nav navbar-right"> 
-                        <li><a class="navbar-link" href="<?php echo $this->url('user', array('action'=>'add')); ?>"><?php echo "<b class='glyphicon glyphicon-plus'></b>"; echo $this->translate(' Registrácia'); ?></a></li>
-                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <?php if(!$this->zfcUserIdentity()) : ?>
+                        <li><a class="navbar-link" href="<?php echo $this->url('zfcuser', array('action'=>'login')); ?>"><?php echo "<b class='glyphicon glyphicon-plus'></b>"; echo $this->translate(' Prihlásenie'); ?></a></li>
+                        <?php else : ?>
+                        <li><a class="navbar-link" href="<?php echo $this->url('zfcuser', array('action'=>'index')); ?>"><?php echo "<b class='glyphicon glyphicon-user'></b>"; echo $this->translate(' Profil'); ?></a></li>
+                    <?php endif; ?>
+
                     
                 </div><!--/.nav-collapse -->
             </div>

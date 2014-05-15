@@ -10,6 +10,8 @@ namespace Product\Controller;
  use Product\Form\ProductForm;
  use Zend\Form\Form;
  use Zend\Form\Element;
+ use ZfcUser\Service\User as UserService;
+ use ZfcUser\Options\UserControllerOptionsInterface;
 
 
 
@@ -18,7 +20,7 @@ class ProductController extends AbstractActionController
     protected $productTable;
     protected $categoryTable;
     protected $photoTable;
-    protected $userTable;
+    protected $auth;
     public $category;
 
     public function random()
@@ -52,13 +54,11 @@ class ProductController extends AbstractActionController
          return $this->productTable;
      }
 
-    public function getUserTable()
+    public function getAuthService()
     {
-       if (!$this->userTable) {
-            $sm = $this->getServiceLocator();
-            $this->userTable = $sm->get('User\Model\UserTable');
-        }
-        return $this->userTable;
+        $sm = $app->getServiceManager();
+        $this->auth = $sm->get('zfcuser_auth_service');
+        return $this->auth;
      }
 
     public function getCategoryTable() {
@@ -110,7 +110,6 @@ class ProductController extends AbstractActionController
         try {
              $product = $this->getProductTable()->getProduct($id);
              $category = $this->getCategoryTable()->getCategory($product->category_id);
-             $user = $this->getUserTable()->getUser($product->user_id);
          }
          catch (\Exception $ex) {
              
@@ -123,12 +122,12 @@ class ProductController extends AbstractActionController
        return new ViewModel(array(
              'product' => $product,
              'category' => $category,
-             'user' => $user,
              ));
      }
 
      public function addAction()
- {
+     {
+        if($this->zfcUserAuthentication()->hasIdentity()){
         $categories = $this->getCategoryTable()->fetchAll();
         $category_options = array();
            foreach ($categories as $category) {
@@ -145,8 +144,8 @@ class ProductController extends AbstractActionController
             $data = $this->getRequest()->getPost();
 
              $product = new Product();
-             
-
+                
+                $data['user_id'] = $this->zfcUserAuthentication()->getIdentity()->getId();
                 $data["foto1"] = $this->loadPhotos("foto1");
                 $data["foto2"] = $this->loadPhotos("foto2");
                 $data["foto3"] = $this->loadPhotos("foto3");
@@ -165,11 +164,18 @@ class ProductController extends AbstractActionController
             
          }
          return array('form' => $form);
+        }
+        else return $this->redirect()->toRoute('zfcuser/login');
      }
 
      public function editAction()
      {
         $id = (int) $this->params()->fromRoute('id',0);
+        if(!$this->zfcUserAuthentication()->hasIdentity()){
+           return $this->redirect()->toRoute('zfcuser/login');
+        }
+
+
         if(!$id)
         {
             return $this->redirect()->toRoute('product', array(
@@ -189,6 +195,8 @@ class ProductController extends AbstractActionController
                 'action' => 'index'
                 ));
         }
+        if ($product->user_id == $this->zfcUserAuthentication()->getIdentity()->getId()) {
+            
         $categories = $this->getCategoryTable()->fetchAll();
         $category_options = array();
            foreach ($categories as $category) {
@@ -217,16 +225,33 @@ class ProductController extends AbstractActionController
             'id' => $id,
             'form' => $form
             );
+        }
 
-     }
+        else 
+        {
+            return $this->redirect()->toRoute('product');
+        }
+
+        
+    }
+
+
+     
 
      public function deleteAction()
      {
+        if(!$this->zfcUserAuthentication()->hasIdentity()){
+           return $this->redirect()->toRoute('zfcuser/login');
+        }
+
         $id = (int) $this->params()->fromRoute('id', 0);
          if (!$id)
         {
             return $this->redirect()->toRoute('product');
         }
+        $product = $this->getProductTable()->getProduct($id);
+        if ($product->user_id == $this->zfcUserAuthentication()->getIdentity()->getId()) {
+
         $request = $this->getRequest();
         
         if ($request->isPost())
@@ -249,7 +274,13 @@ class ProductController extends AbstractActionController
              'id' => $id,
              'product' => $this->getProductTable()->getProduct($id)
          );
-     }
+        }
+
+        else 
+        {
+            return $this->redirect()->toRoute('product');
+        }
+    }
 
      public function categoriesAction()
      {

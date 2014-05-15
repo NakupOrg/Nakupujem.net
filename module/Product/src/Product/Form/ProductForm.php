@@ -19,6 +19,12 @@ $this->add(array(
 ));
 
 $this->add(array(
+'name' => 'user_id',
+'type' => 'Hidden',
+));
+
+
+$this->add(array(
 'name' => 'title',
 'type' => 'text',
 'options'=> array(

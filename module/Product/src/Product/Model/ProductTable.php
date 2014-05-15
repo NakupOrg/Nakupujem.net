@@ -52,6 +52,7 @@ namespace Product\Model;
              'description'  => $product->description,
              'phone'        => $product->phone,
              'email'        => $product->email,
+             'user_id'      => $product->user_id,
              'location'     => $product->location,
              'shipping'     => $product->shipping,
              'price'        => $product->price,
