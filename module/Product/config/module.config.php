@@ -27,7 +27,7 @@
       'view_manager' => array(
         'template_path_stack' => array(
               'product' => __DIR__ . '/../view',
-              'zfcuser' => __DIR__ . '/../view',
+              
         ),
     ),
       // MODULE CONFIGURATIONS

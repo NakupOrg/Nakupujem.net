@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Starter Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Roboto:900' rel='stylesheet' type='text/css'>
+
+
+
+    <!-- Add custom CSS here -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+        <!-- JavaScript -->
+    <script src="js/jquery-1.10.2.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/jquery.flip.min.js"></script>
+
+        <script>
+        $("#flipbox").click(function(){
+        	$(this).flip({
+			direction:'tb',
+			content:'this is my new content'
+			}),
+        });
+        </script>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <nav id="sidebar-wrapper" role ="navigation">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"><a href="#"><img src="img/user.png" alt="..." /> Elektro predajna</a>
+                </li>
+                <div class="list-group">
+                <li class="active"><a href="#"><i class="fa fa-tachometer"></i>&nbsp; Dashboard</a>
+                </li>
+                <li><a href="#"><i class="fa fa-th-list"></i>&nbsp; Inzeráty</a>
+                </li>
+                <li><a href="#"><i class="fa fa-bar-chart-o"></i>&nbsp; Prehľady</a>
+                </li>
+                <li><a href="#"><i class="fa fa-user"></i>&nbsp; Profil</a>
+                </li>
+                <li><a href="#"><i class="fa fa-money"></i>&nbsp; Balíky</a>
+                </li>
+                <li><a href="#"><i class="fa fa-cogs"></i>&nbsp; Nastavenia</a>
+                </li>
+            </div>
+            </ul>
+        </nav>
+
+
+
+        <!-- Page content -->
+
+
+        	<div class="panel panel-default pull-right panel-right">
+        		<div class="panel-body">
+        		<p class="left">
+        			<h3>Michal Takáč</h3>
+           		</p>
+           		<div class="media">
+  						<a class="pull-left" href="#">
+    						<img class="media-object" src="img/usr-placeholder.png" alt="...">
+  						</a>
+  						<div class="media-body">
+    						<h5 class="media-heading">Vaše hodnotenie:</h5>
+    						<a href="#">Pozrite si komentáre</a> 
+    						<h5 class="media-heading">Aktívny balík:</h5>
+    						<a href="#">Týždeň</a>
+  						</div>
+					</div>
+				</div>
+        	</div>  
+        	<div class="box">
+        	<div class="panel panel-default panel-center">
+        		<div class="panel-heading panel-title">
+        		<i class="fa fa-bar-chart-o"></i>&nbsp; Štatistika dňa</div>
+        		<div class="panel-body">
+        			salaalalalal
+        		</div>
+        		</div>
+        	</div>
+
+    <div class="box-medium">
+        <div class="row">
+        	<div class="col-md-4">
+        	    <div class="balik">
+        		<div class="panel panel-default panel-cube">
+        		<div class="panel-body">
+        			<h4>Balík 7 dní</h4>
+        			<br>
+        			<h1>6,10€</h1>
+        			<br>
+        			<h4>Zisti sa viac o balíku &raquo;</h4>
+        		</div>
+        		</div>
+        		</div>
+        	</div>
+
+        	<div class="col-md-4">
+        	    <div class="balik">
+        		<div class="panel panel-default panel-cube">
+        		<div class="panel-body">
+        			<h4>Balík 14 dní</h4>
+        			<br>
+        			<h1>11,20€</h1>
+        			<br>
+        			<h4>Zisti sa viac o balíku &raquo;</h4>
+        		</div>
+        		</div>
+        		</div>
+        	</div>
+
+        	<div class="col-md-4">
+        	    <div class="balik" id="flipbox">
+        		<div class="panel panel-default panel-cube">
+        		<div class="panel-body">
+        			<h4>Balík 28 dní</h4>
+        			<br>
+        			<h1>16,8€</h1>
+        			<br>
+        			<h4>Zisti viac o balíku &raquo;</h4>
+        		</div>
+        		</div>
+        		</div>
+        	</div>
+        </div>
+    </div>
+
+        		
+     </div>
+
+
+
+</body>
+
+</html>

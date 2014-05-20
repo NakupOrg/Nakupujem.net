@@ -8,7 +8,7 @@ $this->headTitle("Užívateľ: " . $title);
 </p>	
 
 	<div class="col-md-6 col-lg-6">
-		<h2><?php echo $this->escapeHtml($user->username); ?></h2> 
+		<h2><?php echo $this->escapeHtml($user->email); ?></h2> 
 			<h5>Meno: <?php echo $this->escapeHtml($user->first_name); echo $this->escapeHtml($user->last_name); ?></h5>
 			<div class="well">
 			<p>
@@ -22,15 +22,10 @@ $this->headTitle("Užívateľ: " . $title);
 				</table>
 			</p>
 			</div>
-			<a class="btn btn-primary" href="<?php echo $this->url('user', array('action'=>'edit', 'id'=>$user->id)); ?>"><b class="glyphicon glyphicon-edit"></b>&nbsp;Edituj</a>
-			<a class="btn btn-danger" href="<?php echo $this->url('user', array('action'=>'delete', 'id'=>$user->id)); ?>"><b class="glyphicon glyphicon-remove"></b>&nbsp;Zmaž</a>
 		</div>
 
 	<div class="col-md-6 col-lg-6">
-		<h3>Inzeráty používateľa:</h3><br>
-		<?php foreach($products as $product): ?>
-		<a href="<?php echo $this->url('product', array('action' => 'show', 'id' => $product->id));?>"><?php echo $this->escapeHtml($product->title); ?> <br> </a>
-	<?php endforeach; ?>
+		
 	</div>
 
 

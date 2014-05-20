@@ -20,6 +20,7 @@ class ProductController extends AbstractActionController
     protected $productTable;
     protected $categoryTable;
     protected $photoTable;
+    protected $userTable;
     protected $auth;
     public $category;
 
@@ -76,6 +77,15 @@ class ProductController extends AbstractActionController
         return $this->photoTable;
     }
 
+    public function getUserTable()
+    {
+       if (!$this->userTable) {
+            $sm = $this->getServiceLocator();
+            $this->userTable = $sm->get('User\Model\UserTable');
+        }
+        return $this->userTable;
+     }
+
     public function getFileUploadLocation()
     {
     // Fetch Configuration from Module Config
@@ -110,6 +120,7 @@ class ProductController extends AbstractActionController
         try {
              $product = $this->getProductTable()->getProduct($id);
              $category = $this->getCategoryTable()->getCategory($product->category_id);
+             $user = $this->getUserTable()->getUser($product->user_id);
          }
          catch (\Exception $ex) {
              
@@ -122,6 +133,7 @@ class ProductController extends AbstractActionController
        return new ViewModel(array(
              'product' => $product,
              'category' => $category,
+             'user' => $user,
              ));
      }
 

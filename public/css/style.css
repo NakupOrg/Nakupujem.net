@@ -2,6 +2,8 @@ body {
     padding-top: 60px;
     padding-bottom: 0px;
 }
+body > #container { height: auto; min-height: 100%; }
+#content { padding-bottom: 3em; }
 
 .zf-green {
     color: #68b604;
@@ -65,4 +67,23 @@ input:focus {
   max-width: 150px;
   max-height: 150px;
 }
+.center-block{
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
+   text-align: center;
+}
+.footerLine{
+ border: 0; 
+ height: 1px; 
+ background-image: -webkit-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+ background-image: -moz-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+ background-image: -ms-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+ background-image: -o-linear-gradient(left, rgba(0,0,0,0), rgba(0,0,0,0.75), rgba(0,0,0,0)); 
+}
+
+
+
 

@@ -4,9 +4,12 @@ return array(
     'modules' => array(
         'Application',
         'Product',
-        'User',
         'ZfcBase',
         'ZfcUser',
+        'User',
+        'Admin',
+
+
         
     ),
 

@@ -100,7 +100,6 @@ class UserController extends AbstractActionController
 
         try {
              $user = $this->getUserTable()->getUser($id);
-             $products = $this->getProductTable()->getProductsByUser($user->id);
          }
          catch (\Exception $ex) {
              
@@ -112,12 +111,6 @@ class UserController extends AbstractActionController
 
        return new ViewModel(array(
              'user' => $user,
-             'products' => $products,
              ));
      }
-
-	public function loginAction()
-	{
-        return $this->redirect()->toRoute('product');
-	}
 }
